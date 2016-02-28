@@ -18,14 +18,11 @@ import java.util.ArrayList;
  */
 public class HabitAdapter extends BaseAdapter{
     private Context mContext;
-    //private Habit [] mHabits;
-    private ArrayList<Habit> mHabits = new ArrayList<Habit>();
-    //int mSource;
+    private ArrayList<Habit> mHabits;
 
     public HabitAdapter(Context context, ArrayList<Habit> habits){
        mContext = context;
         mHabits = habits;
-        //mSource = source;
     }
 
     @Override
@@ -65,9 +62,9 @@ public class HabitAdapter extends BaseAdapter{
         }
 
         Habit habit = mHabits.get(position);
-        holder.habitNameView.setText("yong");
-        holder.streakView.setText("99");
-        holder.lastDateView.setText("01-23-1994");
+        holder.habitNameView.setText(habit.getHabitName());
+        holder.streakView.setText(habit.getStreak() + "");
+        holder.lastDateView.setText(habit.getLastDate());
 
         return convertView;
     }

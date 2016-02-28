@@ -1,14 +1,10 @@
 package com.example.yongliu.habitloop.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.yongliu.habitloop.R;
@@ -16,18 +12,15 @@ import com.example.yongliu.habitloop.adapters.HabitAdapter;
 import com.example.yongliu.habitloop.models.Habit;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.habits) ListView mRecyclerView;
+    @Bind(R.id.habits) ListView mHabitList;
     HabitAdapter mHabitAdapter;
-    ArrayAdapter apt;
-    private ArrayList<Habit> habits;
-    ArrayList<String> temp = new ArrayList<String>();
+    private ArrayList<Habit> mHabits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +30,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
-        //Intent intent = getIntent();
 
-        //Parcelable[] parcelables = intent.getParcelableArrayExtra("HABITS");
-        //Log.d("PARCE", parcelables.toString());
-        habits = //Arrays.copyOf(parcelables, parcelables.length, ArrayList<Habit>.class);
-
-        HabitAdapter mHabitAdapter = new HabitAdapter(this, R.layout.habit_list_item ,temp);
-        //apt = new ArrayAdapter(this, android.R.layout.simple_list_item_1 ,temp);
-        mRecyclerView.setAdapter(apt);
+        mHabits = new ArrayList<Habit>();
+        //mHabits.add(new Habit("habit1", 0, "01/26/16"));
+        mHabitAdapter = new HabitAdapter(this, mHabits);
+        mHabitList.setAdapter(mHabitAdapter);
     }
 
     @Override
@@ -64,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add_habit) {
-            //Habit newHabit = new Habit("habit1", 0, "01/26/16");
-            temp.add("yong1");
-            //mHabitAdapter.notifyDataSetChanged();
-            apt.notifyDataSetChanged();
+            Habit newHabit = new Habit("habit1", 0, "01/26/16");
+            mHabits.add(newHabit);
+
+            mHabitAdapter.notifyDataSetChanged();
         }
 
         return super.onOptionsItemSelected(item);
