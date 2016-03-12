@@ -49,7 +49,8 @@ public class HabitAdapter extends BaseAdapter{
             //its brand new, create view by inflating it from the context
             //layoutInflater is an android obj that takes xml layouts, and turns them into views
             // and codes we can use
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.habit_list_item, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.habit_list_item,
+                    null);
             holder = new ViewHolder();
             holder.habitNameView = (TextView) convertView.findViewById(R.id.habitName);
             holder.streakView = (EditText) convertView.findViewById(R.id.streak);

@@ -29,10 +29,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        toolbar.setNavigationIcon(R.drawable.ic_dehaze_black_24dp);
+
         ButterKnife.bind(this);
 
         mHabits = new ArrayList<Habit>();
-        //mHabits.add(new Habit("habit1", 0, "01/26/16"));
         mHabitAdapter = new HabitAdapter(this, mHabits);
         mHabitList.setAdapter(mHabitAdapter);
     }
