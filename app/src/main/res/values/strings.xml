@@ -3,4 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_new_habbit">Add A New Habit</string>
     <string name="action_edit_habit">Edit Habits</string>
+    <string name="title_activity_habit_info">HabitInfoActivity</string>
+    <string name="habit_name_hint">Habit Name</string>
+    <string name="description_hint">Description (Optional)</string>
 </resources>

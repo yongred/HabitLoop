@@ -1,5 +1,6 @@
 package com.example.yongliu.habitloop.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -54,10 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add_habit) {
-            Habit newHabit = new Habit("habit1", 0, "01/26/16");
-            mHabits.add(newHabit);
-
-            mHabitAdapter.notifyDataSetChanged();
+            //Habit newHabit = new Habit("habit1", 0, "01/26/16");
+            //mHabits.add(newHabit);
+            //mHabitAdapter.notifyDataSetChanged();
+            Intent intent = new Intent(this, HabitInfoActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
