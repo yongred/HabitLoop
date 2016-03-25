@@ -7,13 +7,14 @@ public class Habit{
     private String mHabitName;
     private String mTime; //when they want to do the habit at that day
     private int mStreak;
-    private String mDays;
+    private WeekDays mDays;
+    //private String mDays;
 
     public Habit() {
 
     }
 
-    public Habit(String habitName, int streak, String time, String days){
+    public Habit(String habitName, int streak, String time, WeekDays days){
         mHabitName = habitName;
         mTime = time;
         mStreak = streak;
@@ -44,11 +45,11 @@ public class Habit{
         mStreak = streak;
     }
 
-    public String getDays() {
+    public WeekDays getDays() {
         return mDays;
     }
 
-    public void setDays(String days) {
+    public void setDays(WeekDays days) {
         mDays = days;
     }
 }

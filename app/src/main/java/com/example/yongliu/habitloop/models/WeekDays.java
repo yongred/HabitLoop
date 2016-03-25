@@ -18,12 +18,20 @@ public class WeekDays {
         for (Boolean day:mDayBools) {
             day = false;
         }
+        setDisplayString();
     }
 
     public WeekDays(String [] days){
         setCheckedDays(days);
+        setDisplayString();
     }
 
+    public WeekDays(Boolean [] boolDays){
+        mDayBools = boolDays;
+        setDisplayString();
+    }
+
+    //from string days to set bool days
     private void setCheckedDays(String [] days){
         for(String d: days){
             int index = Arrays.asList(DAY_STRINGS).indexOf(d);
@@ -33,7 +41,9 @@ public class WeekDays {
         }
     }
 
+    //string for which days to display on the habit list in main activity
     public void setDisplayString(){
+        mDisplayString = ""; //set to avoid 'null' being appended
         int countDays =0;
         for(int i = 0; i< DAY_STRINGS.length; i++){
             if(mDayBools[i]){

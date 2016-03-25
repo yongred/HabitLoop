@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.adapters.HabitAdapter;
-import com.example.yongliu.habitloop.models.Habit;
 import com.example.yongliu.habitloop.models.TempHabits;
 
 import butterknife.Bind;
@@ -41,11 +40,23 @@ public class MainActivity extends AppCompatActivity {
 
         mHabitAdapter = new HabitAdapter(this, TempHabits.mHabits);
         mHabitListView.setAdapter(mHabitAdapter);
-
+        /*
         Habit h1 = new Habit("habit1", 2, "5:00PM - 9:00PM", "Tue Thr Fri Sat");
         Habit h2 = new Habit("habit2", 4, "1:00AM - 2:00PM", "Tue Fri Sun");
         TempHabits.mHabits.add(h1);
-        TempHabits.mHabits.add(h2);
+        TempHabits.mHabits.add(h2); */
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mHabitAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHabitAdapter.notifyDataSetChanged();
     }
 
     @Override

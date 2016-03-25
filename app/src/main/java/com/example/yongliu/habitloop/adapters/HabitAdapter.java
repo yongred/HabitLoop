@@ -67,7 +67,7 @@ public class HabitAdapter extends BaseAdapter{
         holder.habitNameView.setText(habit.getHabitName());
         holder.habitStreakView.setText(habit.getStreak() + "");
         holder.habitTimeView.setText(habit.getTime());
-        holder.habitDaysView.setText(habit.getDays());
+        holder.habitDaysView.setText(habit.getDays().getDisplayString());
 
         return convertView;
     }
