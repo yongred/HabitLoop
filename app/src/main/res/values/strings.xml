@@ -6,4 +6,6 @@
     <string name="title_activity_habit_info">HabitInfoActivity</string>
     <string name="habit_name_hint">Habit Name</string>
     <string name="description_hint">Description (Optional)</string>
+    <string name="title_activity_graph">GraphActivity</string>
+    <string name="title_activity_edit">EditActivity</string>
 </resources>

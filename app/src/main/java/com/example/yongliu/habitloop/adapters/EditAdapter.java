@@ -13,14 +13,14 @@ import com.example.yongliu.habitloop.models.Habit;
 import java.util.ArrayList;
 
 /**
- * Created by YongLiu on 1/11/16.
+ * Created by YongLiu on 3/24/16.
  */
-public class HabitAdapter extends BaseAdapter{
+public class EditAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Habit> mHabits;
 
-    public HabitAdapter(Context context, ArrayList<Habit> habits){
-       mContext = context;
+    public EditAdapter(Context context, ArrayList<Habit> habits) {
+        mContext = context;
         mHabits = habits;
     }
 
@@ -44,30 +44,23 @@ public class HabitAdapter extends BaseAdapter{
         //convertView (2nd parameter) is the view we reuse
         ViewHolder holder;
 
-        if(convertView == null){
+        if (convertView == null) {
             //its brand new, create view by inflating it from the context
             //layoutInflater is an android obj that takes xml layouts, and turns them into views
             // and codes we can use
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.habit_list_item,
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.edit_list_item,
                     null);
             holder = new ViewHolder();
-            holder.habitNameView = (TextView) convertView.findViewById(R.id.habitNameViewMain);
-            holder.habitStreakView = (TextView) convertView.findViewById(R.id.habitStreakView);
-            holder.habitTimeView = (TextView) convertView.findViewById(R.id.habitTimeView);
-            holder.habitDaysView = (TextView) convertView.findViewById(R.id.habitDaysView);
+            holder.habitNameView = (TextView) convertView.findViewById(R.id.habitNameViewEdit);
 
             convertView.setTag(holder);
-        }
-        else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         //get and set habit infos here
         Habit habit = mHabits.get(position);
         holder.habitNameView.setText(habit.getHabitName());
-        holder.habitStreakView.setText(habit.getStreak() + "");
-        holder.habitTimeView.setText(habit.getTime());
-        holder.habitDaysView.setText(habit.getDays());
 
         return convertView;
     }
@@ -77,11 +70,7 @@ public class HabitAdapter extends BaseAdapter{
         super.notifyDataSetChanged();
     }
 
-    public static class ViewHolder{
+    public static class ViewHolder {
         TextView habitNameView;
-        TextView habitStreakView;
-        TextView habitTimeView;
-        TextView habitDaysView;
     }
-
 }

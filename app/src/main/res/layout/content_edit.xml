@@ -6,17 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main"
-    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_edit"
+    tools:context="com.example.yongliu.habitloop.ui.EditActivity"
     android:background="@color/colorActivityBackground">
 
+
     <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mainHabitsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/editHabitsList"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:paddingLeft="@dimen/list_item_margin"
         android:paddingRight="@dimen/list_item_margin"
         android:paddingBottom="@dimen/list_item_margin"/>
+
 </RelativeLayout>

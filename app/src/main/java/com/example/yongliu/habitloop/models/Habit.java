@@ -5,17 +5,19 @@ package com.example.yongliu.habitloop.models;
  */
 public class Habit{
     private String mHabitName;
-    private String mLastDate;
+    private String mTime; //when they want to do the habit at that day
     private int mStreak;
+    private String mDays;
 
     public Habit() {
 
     }
 
-    public Habit(String habitName, int streak, String lastDate){
+    public Habit(String habitName, int streak, String time, String days){
         mHabitName = habitName;
-        mLastDate = lastDate;
+        mTime = time;
         mStreak = streak;
+        mDays = days;
     }
 
     public String getHabitName() {
@@ -26,12 +28,12 @@ public class Habit{
         mHabitName = habitName;
     }
 
-    public String getLastDate() {
-        return mLastDate;
+    public String getTime() {
+        return mTime;
     }
 
-    public void setLastDate(String lastDate) {
-        mLastDate = lastDate;
+    public void setTime(String time) {
+        mTime = time;
     }
 
     public int getStreak() {
@@ -40,5 +42,13 @@ public class Habit{
 
     public void setStreak(int streak) {
         mStreak = streak;
+    }
+
+    public String getDays() {
+        return mDays;
+    }
+
+    public void setDays(String days) {
+        mDays = days;
     }
 }

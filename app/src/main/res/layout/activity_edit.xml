@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.yongliu.habitloop.ui.HabitInfoActivity">
+    tools:context="com.example.yongliu.habitloop.ui.EditActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
@@ -22,6 +22,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_habit_info"/>
+    <include layout="@layout/content_edit"/>
 
 </android.support.design.widget.CoordinatorLayout>

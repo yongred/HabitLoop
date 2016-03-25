@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="actionbarBackground">#22ff99</color>
+    <!-- app theme colors -->
+    <color name="colorActivityBackground">#777777</color>
+    <color name="colorListItem">#bbbbbb</color>
+    <color name="colorMyTheme">#9999ff</color>
+    <color name="colorListItemHover">#9999ff</color>
+    <color name="colorListItemPress">#ff2222</color>
 </resources>
