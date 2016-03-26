@@ -40,11 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         mHabitAdapter = new HabitAdapter(this, TempHabits.mHabits);
         mHabitListView.setAdapter(mHabitAdapter);
-        /*
-        Habit h1 = new Habit("habit1", 2, "5:00PM - 9:00PM", "Tue Thr Fri Sat");
-        Habit h2 = new Habit("habit2", 4, "1:00AM - 2:00PM", "Tue Fri Sun");
-        TempHabits.mHabits.add(h1);
-        TempHabits.mHabits.add(h2); */
     }
 
     @Override
@@ -78,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             //Habit newHabit = new Habit("habit1", 0, "01/26/16");
             //mHabits.add(newHabit);
             //mHabitAdapter.notifyDataSetChanged();
-            Intent intent = new Intent(this, HabitInfoActivity.class);
+            Intent intent = new Intent(this, AddHabitActivity.class);
             startActivity(intent);
         }
 

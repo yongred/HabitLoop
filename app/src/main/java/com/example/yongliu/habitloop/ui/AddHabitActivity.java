@@ -22,7 +22,7 @@ import java.util.Calendar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class HabitInfoActivity extends AppCompatActivity {
+public class AddHabitActivity extends AppCompatActivity {
     //habit name needs to save
     @Bind(R.id.habitNameInput) EditText habitNameEditText;
 
@@ -45,7 +45,7 @@ public class HabitInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_habit_info);
+        setContentView(R.layout.activity_add_habit);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -103,7 +103,7 @@ public class HabitInfoActivity extends AppCompatActivity {
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(HabitInfoActivity.this, new TimePickerDialog.OnTimeSetListener
+                mTimePicker = new TimePickerDialog(AddHabitActivity.this, new TimePickerDialog.OnTimeSetListener
                         () {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
