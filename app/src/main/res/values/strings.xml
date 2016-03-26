@@ -19,4 +19,8 @@
     <string name="fri_check_text">Fri</string>
     <string name="sat_check_text">Sat</string>
     <string name="sun_check_text">Sun</string>
+    <string name="dialog_delete_title">Delete Alert!</string>
+    <string name="dialog_delete_message">Are you sure you want to delete this habit?</string>
+    <string name="dialog_positive_button">Yes</string>
+    <string name="dialog_negative_button">NO</string>
 </resources>

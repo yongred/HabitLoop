@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 public class EditActivity extends AppCompatActivity {
 
     @Bind(R.id.editHabitsList) ListView mEditListView;
+
     EditAdapter mEditAdapter;
 
 
