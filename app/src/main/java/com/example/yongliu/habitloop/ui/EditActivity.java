@@ -34,4 +34,17 @@ public class EditActivity extends AppCompatActivity {
         mEditListView.setAdapter(mEditAdapter);
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mEditAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mEditAdapter.notifyDataSetChanged();
+    }
+
 }

@@ -6,6 +6,8 @@ package com.example.yongliu.habitloop.models;
 public class Habit{
     private String mHabitName;
     private String mTime; //when they want to do the habit at that day
+    private String mStartTime;
+    private String mEndTime;
     private int mStreak;
     private WeekDays mDays;
     //private String mDays;
@@ -14,9 +16,10 @@ public class Habit{
 
     }
 
-    public Habit(String habitName, int streak, String time, WeekDays days){
+    public Habit(String habitName, int streak, String startTime, String endTime, WeekDays days){
         mHabitName = habitName;
-        mTime = time;
+        mStartTime = startTime;
+        mEndTime = endTime;
         mStreak = streak;
         mDays = days;
     }
@@ -51,5 +54,21 @@ public class Habit{
 
     public void setDays(WeekDays days) {
         mDays = days;
+    }
+
+    public String getEndTime() {
+        return mEndTime;
+    }
+
+    public void setEndTime(String endTime) {
+        mEndTime = endTime;
+    }
+
+    public String getStartTime() {
+        return mStartTime;
+    }
+
+    public void setStartTime(String startTime) {
+        mStartTime = startTime;
     }
 }

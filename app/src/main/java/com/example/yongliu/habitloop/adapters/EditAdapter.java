@@ -3,6 +3,7 @@ package com.example.yongliu.habitloop.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.models.Habit;
+import com.example.yongliu.habitloop.ui.InfoEditActivity;
 
 import java.util.ArrayList;
 
@@ -91,7 +93,9 @@ public class EditAdapter extends BaseAdapter {
         holder.editButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(mContext, InfoEditActivity.class);
+                intent.putExtra(mContext.getString(R.string.EXTRA_HABIT_CLICKED_INDEX), position);
+                mContext.startActivity(intent);
             }
         });
 

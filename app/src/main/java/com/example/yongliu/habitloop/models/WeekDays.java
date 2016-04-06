@@ -11,11 +11,11 @@ public class WeekDays {
     private String mDisplayString;
 
     // 1st (index 0)= Mon, ... 7th (index 6)= Sun
-    private Boolean [] mDayBools = {false, false, false, false, false, false, false};
+    private boolean [] mDayBools = {false, false, false, false, false, false, false};
 
     public WeekDays(){
-        mDayBools = new Boolean[7];
-        for (Boolean day:mDayBools) {
+        mDayBools = new boolean[7];
+        for (boolean day:mDayBools) {
             day = false;
         }
         setDisplayString();
@@ -26,7 +26,7 @@ public class WeekDays {
         setDisplayString();
     }
 
-    public WeekDays(Boolean [] boolDays){
+    public WeekDays(boolean [] boolDays){
         mDayBools = boolDays;
         setDisplayString();
     }
@@ -61,11 +61,11 @@ public class WeekDays {
         return mDisplayString;
     }
 
-    public Boolean[] getDayBools() {
+    public boolean[] getDayBools() {
         return mDayBools;
     }
 
-    public void setDayBools(Boolean[] dayBools) {
+    public void setDayBools(boolean[] dayBools) {
         this.mDayBools = dayBools;
     }
 }
