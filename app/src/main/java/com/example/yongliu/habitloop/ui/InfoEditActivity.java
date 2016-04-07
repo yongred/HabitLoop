@@ -18,6 +18,7 @@ import android.widget.TimePicker;
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.models.Habit;
 import com.example.yongliu.habitloop.models.TempHabits;
+import com.example.yongliu.habitloop.models.WeekDays;
 
 import java.util.Calendar;
 
@@ -48,6 +49,7 @@ public class InfoEditActivity extends AppCompatActivity {
 
     private CheckBox [] mCheckBoxes;
     private Habit mHabit; //current habit to edit
+    private int mIndex; //current habit index
 
     static final String TAG = InfoEditActivity.class.toString();
     @Override
@@ -71,6 +73,7 @@ public class InfoEditActivity extends AppCompatActivity {
         int position = intent.getIntExtra(getString(R.string.EXTRA_HABIT_CLICKED_INDEX), -1);
         if(position != -1) {
             mHabit = TempHabits.mHabits.get(position);
+            mIndex = position;
         }
         else{
             Log.e(TAG, getString(R.string.passing_extra_error));
@@ -78,7 +81,7 @@ public class InfoEditActivity extends AppCompatActivity {
 
         //set buttons onclick listener
         setOnclickDeleteButton();
-
+        setOnclickSaveButton();
         //set up input infos
         putStartedInputInfos();
     }
@@ -132,6 +135,25 @@ public class InfoEditActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void setOnclickSaveButton(){
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //getting the infos from the Views and set it in new habit for storage
+                String name = habitNameEditText.getText().toString();
+                String startTime = pickTimeStartEdit.getText().toString();
+                String endTime = pickTimeEndEdit.getText().toString();
+                boolean [] boolDays = getCheckedDays();
+                WeekDays days = new WeekDays(boolDays);
+                //set the habit chosen to new infos
+                TempHabits.mHabits.set(mIndex, new Habit(name, 0, startTime, endTime, days));
+
+                finish();
+            }
+        });
     }
 
     //informations on the habit put it in the inputs
