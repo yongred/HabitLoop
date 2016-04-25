@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.yongliu.habitloop.R;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         mHabitAdapter = new HabitAdapter(this, TempHabits.mHabits);
         mHabitListView.setAdapter(mHabitAdapter);
+
+        setListViewClickListener();
     }
 
     @Override
@@ -84,6 +87,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setListViewClickListener(){
+        mHabitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                intent.putExtra(getString(R.string.EXTRA_HABIT_CLICKED_INDEX), position);
+                startActivity(intent);
+            }
+        });
     }
 
 }

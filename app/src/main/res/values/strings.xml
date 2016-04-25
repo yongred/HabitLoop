@@ -26,4 +26,5 @@
     <string name="title_activity_info_edit">InfoEditActivity</string>
     <string name="EXTRA_HABIT_CLICKED_INDEX">HABIT CLICKED INDEX</string>
     <string name="passing_extra_error">passing Extra Error</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
 </resources>
