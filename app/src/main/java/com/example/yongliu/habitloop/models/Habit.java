@@ -1,5 +1,8 @@
 package com.example.yongliu.habitloop.models;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Created by YongLiu on 1/11/16.
  */
@@ -10,6 +13,9 @@ public class Habit{
     private String mEndTime;
     private int mStreak;
     private WeekDays mDays;
+
+    private ArrayList<Date> mCompleteDays;
+    private ArrayList<Date> mIncompleteDays;
     //private String mDays;
 
     public Habit() {
@@ -22,6 +28,8 @@ public class Habit{
         mEndTime = endTime;
         mStreak = streak;
         mDays = days;
+        mCompleteDays = new ArrayList<Date>();
+        mIncompleteDays = new ArrayList<Date>();
     }
 
     public String getHabitName() {
@@ -71,4 +79,30 @@ public class Habit{
     public void setStartTime(String startTime) {
         mStartTime = startTime;
     }
+
+
+    public ArrayList<Date> getCompleteDays() {
+        return mCompleteDays;
+    }
+
+    public void addCompleteDays(Date date){
+        mCompleteDays.add(date);
+    }
+
+    public void removeCompleteDays(Date date){
+        mCompleteDays.remove(date);
+    }
+
+    public ArrayList<Date> getIncompleteDays() {
+        return mIncompleteDays;
+    }
+
+    public void addIncompleteDays(Date date){
+        mIncompleteDays.add(date);
+    }
+
+    public void removeIncompleteDays(Date date){
+        mIncompleteDays.remove(date);
+    }
+
 }

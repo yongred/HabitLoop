@@ -1,8 +1,10 @@
 package com.example.yongliu.habitloop.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.adapters.GridCellAdapter;
+import com.example.yongliu.habitloop.models.Habit;
+import com.example.yongliu.habitloop.models.TempHabits;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +41,11 @@ public class CalendarActivity extends AppCompatActivity {
     // current displayed month
     private Calendar currentDate = Calendar.getInstance();
 
+    private Habit mHabit; //current habit to display calendar
+    private int mIndex; //current habit index
+
+    static final String TAG = CalendarActivity.class.toString();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +58,17 @@ public class CalendarActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         assignClickHandlers();
         updateCalendar();
+
+        //which habit from MainActivity
+        Intent intent = getIntent();
+        int position = intent.getIntExtra(getString(R.string.EXTRA_HABIT_CLICKED_INDEX), -1);
+        if(position != -1) {
+            mHabit = TempHabits.mHabits.get(position);
+            mIndex = position;
+        }
+        else{
+            Log.e(TAG, getString(R.string.passing_extra_error));
+        }
     }
 
     private void updateCalendar() {
@@ -67,7 +87,7 @@ public class CalendarActivity extends AppCompatActivity {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
         //update grid
-        gridAdapter = new GridCellAdapter(this, cells,titleDate);
+        gridAdapter = new GridCellAdapter(this, cells,titleDate, mIndex);
         calendarGridView.setAdapter(gridAdapter);
         // update title
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");
@@ -92,6 +112,13 @@ public class CalendarActivity extends AppCompatActivity {
                 updateCalendar();
             }
         });
+        /*
+        calendarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });*/
 
     }
 
