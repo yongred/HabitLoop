@@ -13,6 +13,7 @@ import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.models.TempHabits;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -120,12 +121,31 @@ public class GridCellAdapter extends BaseAdapter {
     private int checkComplete(Date currentCellDate){
         //0= incomplete, 1= complete, 2= neither/empty
         int status = 2;
+        ArrayList<Date> completes = TempHabits.mHabits.get(mHabitPosition).getCompleteDays();
+        ArrayList<Date> incompletes = TempHabits.mHabits.get(mHabitPosition).getIncompleteDays();
 
-        if(TempHabits.mHabits.get(mHabitPosition).getCompleteDays().contains(currentCellDate)){
-            status = 1;
+        for(Date complete : completes){
+            Calendar comp = Calendar.getInstance();
+            Calendar current = Calendar.getInstance();
+            comp.setTime(complete);
+            current.setTime(currentCellDate);
+            boolean sameDay = comp.get(Calendar.YEAR) == current.get(Calendar.YEAR) && comp.get(Calendar.DAY_OF_YEAR) == current.get(Calendar.DAY_OF_YEAR);
+
+            if(sameDay){
+                status = 1;
+            }
         }
-        else if(TempHabits.mHabits.get(mHabitPosition).getIncompleteDays().contains(currentCellDate)){
-            status = 0;
+
+        for(Date incomplete : incompletes){
+            Calendar incomp = Calendar.getInstance();
+            Calendar current = Calendar.getInstance();
+            incomp.setTime(incomplete);
+            current.setTime(currentCellDate);
+            boolean sameDay = incomp.get(Calendar.YEAR) == current.get(Calendar.YEAR) && incomp.get(Calendar.DAY_OF_YEAR) == current.get(Calendar.DAY_OF_YEAR);
+
+            if(sameDay){
+                status = 0;
+            }
         }
 
         return status;

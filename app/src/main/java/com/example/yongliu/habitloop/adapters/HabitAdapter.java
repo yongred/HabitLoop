@@ -64,6 +64,7 @@ public class HabitAdapter extends BaseAdapter{
 
         //get and set habit infos here
         Habit habit = mHabits.get(position);
+        habit.calculateStreak();
         holder.habitNameView.setText(habit.getHabitName());
         holder.habitStreakView.setText(habit.getStreak() + "");
         holder.habitTimeView.setText(habit.getStartTime() + " - " + habit.getEndTime());

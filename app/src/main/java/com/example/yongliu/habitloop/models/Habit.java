@@ -105,4 +105,9 @@ public class Habit{
         mIncompleteDays.remove(date);
     }
 
+    //not finish
+    public void calculateStreak(){
+        mStreak = mCompleteDays.size() + mIncompleteDays.size();
+    }
+
 }
