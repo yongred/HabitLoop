@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="description" content="Habit Loop Login Page">
+	<meta name="author" content="Hoyin Ki, Ricky Chai, Yong Ding Liu">
+	<link rel="stylesheet" type="text/css" href="HabitLoop.css">
+    <title>HabitLoop - Login</title>
+    
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+    <div class = "container">
+	  
+	  <header>HABIT LOOP (probably replace with a banner)</header> 
+	  <hr>     
+	  
+	  <div class = "loginHeader">
+	    <h1>Login to Your Account</h1>
+	  </div>
+	  
+	  <div class = "accountBox">	  <!-- login and register box -->
+	    <div class = "accountContainer">   <!-- login form -->
+		  <div class = "innerBox" id = "loginBox">
+		    <h2>Returning User</h2>
+			<hr>
+			<div class = "emptySpace"></div>
+			<form name = "login" action = "index_submit" method = "get" accept-charset = "utf-8">
+			  <div class = "userLogin">
+			    <ul>
+			      <li class = "formInput">
+				  <input type = "email" name = "usermail" placeholder = "Email" required>
+				  </li>
+				  <li class = "formInput">
+				  <input type = "password" name = "password" placeholder = "password" required>
+				  </li>
+			    </ul>
+			  </div>
+			  <div class = "buttons">
+			    <input type = "submit" value = "Login">
+			  </div>
+			</form>
+		  </div>
+		</div>	<!-- end of login form -->
+		
+		<div class = "accountContainer">  <!-- register box -->
+		  <div class = "innerBox" id = "registerBox">
+		    <h2>New User</h2>
+			<hr>
+			<div class="emptySpace"></div>
+			  <div class = "userLogin">
+			    <ul>
+			      <h3>In order to use Habit Loop, please first create an account by clicking the "Register" button here.</h3>
+			    </ul>
+			  </div>
+			  <div class = "buttons">
+			    <FORM METHOD = "LINK" ACTION = "HabitLoop_Register.html">
+       		    <INPUT TYPE = "submit" VALUE = "Register">
+			    </FORM>
+			  </div>
+		    </div>
+		</div>	  <!-- end of register box -->
+	  </div>	  <!-- end of login and register box -->
+	  
+	  <hr>
+	  <footer>
+	  <p>This webpage is designed by</p>
+	  <p>Howard Ki, Ricky Chai, Yongding Liu</p>
+	  <p>for CISC 4900 project</p>
+	  </footer>
+	  
+    </div> 	<!-- end of website content container -->
+  </body>
+
+</html>
