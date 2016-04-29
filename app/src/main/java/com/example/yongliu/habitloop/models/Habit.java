@@ -107,7 +107,7 @@ public class Habit{
 
     //not finish
     public void calculateStreak(){
-        mStreak = mCompleteDays.size() + mIncompleteDays.size();
+        mStreak = mCompleteDays.size();
     }
 
 }

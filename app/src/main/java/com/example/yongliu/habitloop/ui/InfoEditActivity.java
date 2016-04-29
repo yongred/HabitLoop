@@ -141,7 +141,7 @@ public class InfoEditActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Habit targetHb = TempHabits.mHabits.get(mIndex);
                 //getting the infos from the Views and set it in new habit for storage
                 String name = habitNameEditText.getText().toString();
                 String startTime = pickTimeStartEdit.getText().toString();
@@ -149,7 +149,10 @@ public class InfoEditActivity extends AppCompatActivity {
                 boolean [] boolDays = getCheckedDays();
                 WeekDays days = new WeekDays(boolDays);
                 //set the habit chosen to new infos
-                TempHabits.mHabits.set(mIndex, new Habit(name, 0, startTime, endTime, days));
+                targetHb.setHabitName(name);
+                targetHb.setStartTime(startTime);
+                targetHb.setEndTime(endTime);
+                targetHb.setDays(days);
 
                 finish();
             }

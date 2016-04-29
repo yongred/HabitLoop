@@ -57,7 +57,6 @@ public class CalendarActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         assignClickHandlers();
-        updateCalendar();
 
         //which habit from MainActivity
         Intent intent = getIntent();
@@ -65,10 +64,24 @@ public class CalendarActivity extends AppCompatActivity {
         if(position != -1) {
             mHabit = TempHabits.mHabits.get(position);
             mIndex = position;
+
         }
         else{
             Log.e(TAG, getString(R.string.passing_extra_error));
         }
+        updateCalendar();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        updateCalendar();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateCalendar();
     }
 
     private void updateCalendar() {
@@ -87,7 +100,7 @@ public class CalendarActivity extends AppCompatActivity {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
         //update grid
-        gridAdapter = new GridCellAdapter(this, cells,titleDate, mIndex);
+        gridAdapter = new GridCellAdapter(this, cells, titleDate, mIndex);
         calendarGridView.setAdapter(gridAdapter);
         // update title
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");

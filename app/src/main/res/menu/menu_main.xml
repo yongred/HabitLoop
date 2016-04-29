@@ -12,11 +12,11 @@
 -->
     <item android:id="@+id/action_check_statistics"
           android:title="check statistics"
-          android:icon="@drawable/ic_graph_black"
+          android:icon="@drawable/ic_graph_button_48"
           app:showAsAction="always"/>
 
     <item android:id="@+id/action_add_habit"
       android:title="@string/action_new_habbit"
-      android:icon="@drawable/ic_add_black_24dp"
+      android:icon="@drawable/ic_add_button_48"
           app:showAsAction="always"/>
 </menu>

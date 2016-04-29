@@ -3,6 +3,7 @@ package com.example.yongliu.habitloop.adapters;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 
 import com.example.yongliu.habitloop.R;
+import com.example.yongliu.habitloop.models.Habit;
 import com.example.yongliu.habitloop.models.TempHabits;
 
 import java.util.ArrayList;
@@ -31,6 +33,8 @@ public class GridCellAdapter extends BaseAdapter {
         mDays = days;
         mCurrentDate = currentDate;
         mHabitPosition = habitPosition;
+
+        Log.d("GridCellAdapter", "habitPosition: " + mHabitPosition);
     }
 
     @Override
@@ -91,22 +95,23 @@ public class GridCellAdapter extends BaseAdapter {
         holder.gridcellButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int status = checkComplete(currentCellDate);
-                if(status == 2){
-                    TempHabits.mHabits.get(mHabitPosition).addCompleteDays(currentCellDate);
+                Habit hb = TempHabits.mHabits.get(mHabitPosition);
+                Date comp = checkContain(hb.getCompleteDays(), currentCellDate);
+                Date incomp = checkContain(hb.getIncompleteDays(), currentCellDate);
+                if(comp != null){ //currently filled with complete color, change to incomplete
+                    hb.removeCompleteDays(comp);
+                    hb.addIncompleteDays(currentCellDate);
+                    v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorGridcellIncomplete));
+                }
+                else if(incomp != null){//currently filled with incomplete color, change to blank/unfilled
+                    hb.removeIncompleteDays(incomp);
+                    v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorGridcellBackground));
+                }
+                else if(incomp == null && comp ==null){ //currently unfilled, change to complete
+                    hb.addCompleteDays(currentCellDate);
                     v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorGridcellComplete));
                 }
-                else if(status == 1){
-                    TempHabits.mHabits.get(mHabitPosition).removeCompleteDays(currentCellDate);
-                    TempHabits.mHabits.get(mHabitPosition).addIncompleteDays(currentCellDate);
-                    v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorGridcellIncomplete));
 
-                }
-                else if(status == 0){
-                    TempHabits.mHabits.get(mHabitPosition).removeIncompleteDays(currentCellDate);
-                    v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorGridcellBackground));
-
-                }
             }
         });
 
@@ -124,31 +129,34 @@ public class GridCellAdapter extends BaseAdapter {
         ArrayList<Date> completes = TempHabits.mHabits.get(mHabitPosition).getCompleteDays();
         ArrayList<Date> incompletes = TempHabits.mHabits.get(mHabitPosition).getIncompleteDays();
 
-        for(Date complete : completes){
-            Calendar comp = Calendar.getInstance();
-            Calendar current = Calendar.getInstance();
-            comp.setTime(complete);
-            current.setTime(currentCellDate);
-            boolean sameDay = comp.get(Calendar.YEAR) == current.get(Calendar.YEAR) && comp.get(Calendar.DAY_OF_YEAR) == current.get(Calendar.DAY_OF_YEAR);
+        Date comp = checkContain(completes, currentCellDate);
+        Date incomp = checkContain(incompletes, currentCellDate);
 
-            if(sameDay){
-                status = 1;
-            }
+        if(comp != null){
+            status = 1;
         }
-
-        for(Date incomplete : incompletes){
-            Calendar incomp = Calendar.getInstance();
-            Calendar current = Calendar.getInstance();
-            incomp.setTime(incomplete);
-            current.setTime(currentCellDate);
-            boolean sameDay = incomp.get(Calendar.YEAR) == current.get(Calendar.YEAR) && incomp.get(Calendar.DAY_OF_YEAR) == current.get(Calendar.DAY_OF_YEAR);
-
-            if(sameDay){
-                status = 0;
-            }
+        else if(incomp != null){
+            status = 0;
         }
 
         return status;
+    }
+
+    private Date checkContain(ArrayList<Date> dateList, Date target){
+
+        for(Date date : dateList){
+            Calendar dateObj = Calendar.getInstance();
+            Calendar current = Calendar.getInstance();
+            dateObj.setTime(date);
+            current.setTime(target);
+            boolean sameDay = dateObj.get(Calendar.YEAR) == current.get(Calendar.YEAR) && dateObj.get(Calendar.DAY_OF_YEAR) == current.get(Calendar.DAY_OF_YEAR);
+
+            if(sameDay){
+                return date;
+            }
+        }
+
+        return null;
     }
 
 

@@ -12,7 +12,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_calendar"
     tools:context="com.example.yongliu.habitloop.ui.CalendarActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorActivityBackground">
 
     <LinearLayout
         android:id="@+id/calendarTitleView"

@@ -11,7 +11,8 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_habit_info"
-    tools:context="com.example.yongliu.habitloop.ui.AddHabitActivity">
+    tools:context="com.example.yongliu.habitloop.ui.AddHabitActivity"
+    android:background="@color/colorActivityBackground">
 
     <include layout="@layout/habit_info_inputs"/>
 

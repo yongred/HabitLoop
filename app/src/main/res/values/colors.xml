@@ -5,17 +5,17 @@
     <color name="colorAccent">#FF4081</color>
     <color name="actionbarBackground">#22ff99</color>
     <!-- app theme colors -->
-    <color name="colorActivityBackground">#333333</color>
+    <color name="colorActivityBackground">#ad0000</color>
     <color name="colorListItem">#ffffff</color>
-    <color name="colorMyTheme">#9999ff</color>
-    <color name="colorListItemHover">#9999ff</color>
+    <color name="colorMyTheme">#3c3c3c</color>
+    <color name="colorListItemHover">#3c3c3c</color>
     <color name="colorListItemPress">#ff2222</color>
     <color name="colorTextInDark">#ffffff</color>
     <color name="colorHintInDark">#dddddd</color>
-    <color name="colorDelButton">#60ff0000</color>
+    <color name="colorDelButton">#ad0000</color>
     <color name="colorDelButtonPress">#ff0000</color>
-    <color name="colorEditButton">#6000ff00</color>
-    <color name="colorEditButtonPress">#00ff00</color>
+    <color name="colorEditButton">#ad0000</color>
+    <color name="colorEditButtonPress">#ff0000</color>
 
     <!-- calendar -->
     <color name="colorCalendarBackground">#ffffff</color>
