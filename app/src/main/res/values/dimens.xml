@@ -6,4 +6,7 @@
     
     <dimen name="list_item_margin">20dp</dimen>
     <dimen name="margintop_infoitems">43dp</dimen>
+
+    <!-- graph dimensions -->
+    <dimen name="graph_margin_top">20dp</dimen>
 </resources>

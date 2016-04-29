@@ -10,4 +10,20 @@
     tools:showIn="@layout/activity_graph"
     tools:context="com.example.yongliu.habitloop.ui.GraphActivity">
 
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:id="@+id/sixMonthGraph"
+        android:background="@color/colorGraphBackground"
+        android:layout_marginTop="@dimen/graph_margin_top"/>
+
+    <!--
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:id="@+id/sixWeekGraph"
+        android:background="@color/colorGraphBackground"
+        android:layout_below="@id/sixMonthGraph"
+        android:layout_marginTop="@dimen/graph_margin_top"/>
+    -->
 </RelativeLayout>

@@ -31,7 +31,6 @@ public class CalendarActivity extends AppCompatActivity {
     Button leftArrowButton;
     @Bind(R.id.calendarRightArrowButton)
     Button rightArrowButton;
-    //@Bind(R.id.calendarWeekdaysImageView) ImageView weekDaysImageView;
     @Bind(R.id.calendarGridView)
     GridView calendarGridView;
 

@@ -110,4 +110,34 @@ public class Habit{
         mStreak = mCompleteDays.size();
     }
 
+    //get number of completes monthly
+    public int monthlyComplete(Date date){
+        int month = date.getMonth();
+        int year = date.getYear();
+        int count = 0;
+
+        for(Date comp : mCompleteDays){
+            if(comp.getYear() == year && comp.getMonth() == month){
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    //get number of incompletes monthly
+    public int monthlyIncomplete(Date date){
+        int month = date.getMonth();
+        int year = date.getYear();
+        int count = 0;
+
+        for(Date incomp : mIncompleteDays){
+            if(incomp.getYear() == year && incomp.getMonth() == month){
+                count++;
+            }
+        }
+
+        return count;
+    }
+
 }

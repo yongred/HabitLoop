@@ -12,7 +12,6 @@ import android.widget.ListView;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.adapters.HabitAdapter;
-import com.example.yongliu.habitloop.models.Habit;
 import com.example.yongliu.habitloop.models.TempHabits;
 
 import butterknife.Bind;
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationIcon(R.drawable.ic_edit_button_48);
+        toolbar.setNavigationIcon(R.drawable.ic_toolbar_edit_48);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,10 +94,9 @@ public class MainActivity extends AppCompatActivity {
         mHabitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Habit selected = (Habit) parent.getItemAtPosition(position);
-                int pos = TempHabits.mHabits.indexOf(selected);
+
                 Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
-                intent.putExtra(getString(R.string.EXTRA_HABIT_CLICKED_INDEX), pos);
+                intent.putExtra(getString(R.string.EXTRA_HABIT_CLICKED_INDEX), position);
                 startActivity(intent);
             }
         });
