@@ -27,4 +27,7 @@
     <string name="EXTRA_HABIT_CLICKED_INDEX">HABIT CLICKED INDEX</string>
     <string name="passing_extra_error">passing Extra Error</string>
     <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="dialog_ok_button">OK</string>
+    <string name="dialog_empty_habit_message">There Are No Habit Created Yet!</string>
+    <string name="dialog_empty_habit_title">Empty Habit Alert!</string>
 </resources>

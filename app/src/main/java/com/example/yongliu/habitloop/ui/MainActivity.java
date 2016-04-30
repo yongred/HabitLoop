@@ -1,5 +1,6 @@
 package com.example.yongliu.habitloop.ui;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -82,9 +83,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else if (id == R.id.action_check_statistics) {
+            if(TempHabits.mHabits.isEmpty()){
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setTitle(R.string.dialog_empty_habit_title)
+                        .setMessage(R.string.dialog_empty_habit_message)
+                        .setPositiveButton(R.string.dialog_ok_button, null)
+                        .show();
 
-            Intent intent = new Intent(this, GraphActivity.class);
-            startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(this, GraphActivity.class);
+                startActivity(intent);
+            }
         }
 
         return super.onOptionsItemSelected(item);

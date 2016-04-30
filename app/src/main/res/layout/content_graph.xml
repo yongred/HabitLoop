@@ -10,12 +10,34 @@
     tools:showIn="@layout/activity_graph"
     tools:context="com.example.yongliu.habitloop.ui.GraphActivity">
 
+    <LinearLayout
+        android:id="@+id/graphTitleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            style="@style/CalendarLeftButton"
+            android:id="@+id/leftArrowButton"/>
+
+        <TextView
+            android:id="@+id/graphHabitTextView"
+            style="@style/GraphHabitTitle"
+            android:text="Current Habit"/>
+
+        <Button
+            style="@style/RightButton"
+            android:id="@+id/rightArrowButton"/>
+
+    </LinearLayout>
+
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"
         android:layout_height="200dip"
         android:id="@+id/sixMonthGraph"
         android:background="@color/colorGraphBackground"
-        android:layout_marginTop="@dimen/graph_margin_top"/>
+        android:layout_marginTop="@dimen/graph_margin_top"
+        android:layout_below="@id/graphTitleView"/>
 
     <!--
     <com.jjoe64.graphview.GraphView
@@ -26,4 +48,5 @@
         android:layout_below="@id/sixMonthGraph"
         android:layout_marginTop="@dimen/graph_margin_top"/>
     -->
+
 </RelativeLayout>

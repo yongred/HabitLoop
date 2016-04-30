@@ -4,6 +4,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.models.Habit;
@@ -21,6 +24,10 @@ import butterknife.ButterKnife;
 public class GraphActivity extends AppCompatActivity {
 
     @Bind(R.id.sixMonthGraph) GraphView monthGraph;
+    @Bind(R.id.leftArrowButton) Button leftButton;
+    @Bind(R.id.rightArrowButton) Button rightButton;
+    @Bind(R.id.graphHabitTextView) TextView habitTileTextview;
+    private int mHabitIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +38,31 @@ public class GraphActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
+        mHabitIndex =0;
+        habitTileTextview.setText(TempHabits.mHabits.get(mHabitIndex).getHabitName());
 
+        setupOnclickListeners();
         sixMonthGraph();
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //sixMonthGraph();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //sixMonthGraph();
+    }
+
     private void sixMonthGraph(){
 
-        Habit hb = TempHabits.mHabits.get(0);
+        Habit hb = TempHabits.mHabits.get(mHabitIndex);
         Calendar currentCal = Calendar.getInstance();
+        monthGraph.removeAllSeries();
 
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(monthGraph);
         staticLabelsFormatter.setHorizontalLabels(new String[]{
@@ -74,6 +97,36 @@ public class GraphActivity extends AppCompatActivity {
         incompSeries.setColor(Color.RED);
         monthGraph.addSeries(compSeries);
         monthGraph.addSeries(incompSeries);
+    }
+
+    private void setupOnclickListeners(){
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mHabitIndex > 0) {
+                    mHabitIndex--;
+                }
+                else{
+                    mHabitIndex = TempHabits.mHabits.size() -1;
+                }
+                habitTileTextview.setText(TempHabits.mHabits.get(mHabitIndex).getHabitName());
+                sixMonthGraph();
+            }
+        });
+
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mHabitIndex < TempHabits.mHabits.size() -1) {
+                    mHabitIndex++;
+                }
+                else{
+                    mHabitIndex = 0;
+                }
+                habitTileTextview.setText(TempHabits.mHabits.get(mHabitIndex).getHabitName());
+                sixMonthGraph();
+            }
+        });
     }
 
 }
