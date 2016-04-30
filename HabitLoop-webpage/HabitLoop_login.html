@@ -30,14 +30,14 @@
 		    <h2>Returning User</h2>
 			<hr>
 			<div class = "emptySpace"></div>
-			<form name = "login" action = "index_submit" method = "get" accept-charset = "utf-8">
+			<form name = "login" action = "login.php" method = "post" accept-charset = "utf-8">
 			  <div class = "userLogin">
 			    <ul>
 			      <li class = "formInput">
-				  <input type = "email" name = "usermail" placeholder = "Email" required>
+				  <input type = "text" name = "username" placeholder = "Username" required>
 				  </li>
 				  <li class = "formInput">
-				  <input type = "password" name = "password" placeholder = "password" required>
+				  <input type = "password" name = "password" placeholder = "Password" value ="" required>
 				  </li>
 			    </ul>
 			  </div>
@@ -59,7 +59,7 @@
 			    </ul>
 			  </div>
 			  <div class = "buttons">
-			    <FORM METHOD = "LINK" ACTION = "HabitLoop_Register.html">
+			    <FORM METHOD = "LINK" ACTION = "HabitLoop_register.html">
        		    <INPUT TYPE = "submit" VALUE = "Register">
 			    </FORM>
 			  </div>

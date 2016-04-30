@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
-    <meta name="description" content="Habit Loop Register Page">
+    <meta name="description" content="Habit Loop Post Register Page">
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 	<meta name="author" content="Hoyin Ki, Ricky Chai, Yong Ding Liu">
 	<link rel="stylesheet" type="text/css" href="HabitLoop.css">
-    <title>HabitLoop - Register</title>
+    <title>HabitLoop - Post-Register</title>
     
     <!--[if IE]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,25 +27,24 @@
 		<div class="registerContainer">
 		<!-- register form -->
 		  <div class="innerBox" id="registerForm">
-		    <h2>Enter your information <font size="2">(required fields are marked with '*')</font></h2>
+		    <h2>Account Created Successfully!</h2>
 			<hr>
 			<div class="emptySpace"></div>
-			<!-- put the boxes for registration here -->
-			<form name = "register" action = "register.php" method = "post" accept-charset = "utf-8">
-			  <div class = "userLogin">
-			    <ul>
-			      <li class = "formInput">
-				  Username<font color="red">*</font>: <input type = "text" name = "username" placeholder = "Username" required>
-				  </li>
-				  <li class = "formInput">
-				  Password<font color="red">*</font>: <input type = "password" name = "password" placeholder = "Password" value ="" required>
-				  </li>
-			    </ul>
+			<!-- put contents here -->
+			<ul>
+			  <li>
+			    <h3>Thank you for registering an account with us!</h3>
+			    <h3>Please click the following button to return to the login screen in order to login and begin using Habit Loop.</h3>
+			  </li>
+			  <div class="emptySpace"></div>
+			  <li>
+			    <div class = "buttons">
+			    <FORM METHOD = "LINK" ACTION = "HabitLoop_login.html">
+       		    <INPUT TYPE = "submit" VALUE = "Return to Login">
+			    </FORM>
 			  </div>
-			  <div class = "buttons">
-			    <input type = "submit" value = "Register New User">
-			  </div>
-			</form>
+			  </li>
+			</ul>
 		  </div>
 		<!-- end of register form -->
 		</div>	  
