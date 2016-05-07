@@ -7,6 +7,8 @@
     <!-- app theme colors -->
     <color name="colorActivityBackground">#ad0000</color>
     <color name="colorListItem">#ffffff</color>
+    <color name="colorMainTheme">#ad0000</color>
+    <color name="colorSubTheme">#3c3c3c</color>
     <color name="colorMyTheme">#3c3c3c</color>
     <color name="colorListItemHover">#3c3c3c</color>
     <color name="colorListItemPress">#ff2222</color>

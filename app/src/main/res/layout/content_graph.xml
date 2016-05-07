@@ -31,22 +31,48 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Past Six Months"
+        android:layout_below="@id/graphTitleView"
+        android:id="@+id/sixMonthLabel"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/graph_margin_top"
+        android:textSize="25sp"
+        android:background="@color/colorSubTheme"
+        android:textStyle="bold"
+        android:textColor="@color/colorMainTheme"/>
+
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"
         android:layout_height="200dip"
         android:id="@+id/sixMonthGraph"
         android:background="@color/colorGraphBackground"
         android:layout_marginTop="@dimen/graph_margin_top"
-        android:layout_below="@id/graphTitleView"/>
+        android:layout_below="@+id/sixMonthLabel"/>
 
-    <!--
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Past Six Weeks"
+        android:layout_below="@id/sixMonthGraph"
+        android:id="@+id/sixWeekLabel"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/graph_margin_top"
+        android:textSize="25sp"
+        android:background="@color/colorSubTheme"
+        android:textStyle="bold"
+        android:textColor="@color/colorMainTheme"/>
+
+
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"
         android:layout_height="200dip"
         android:id="@+id/sixWeekGraph"
         android:background="@color/colorGraphBackground"
-        android:layout_below="@id/sixMonthGraph"
+        android:layout_below="@id/sixWeekLabel"
         android:layout_marginTop="@dimen/graph_margin_top"/>
-    -->
+
 
 </RelativeLayout>

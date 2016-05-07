@@ -1,6 +1,7 @@
 package com.example.yongliu.habitloop.models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -133,6 +134,48 @@ public class Habit{
 
         for(Date incomp : mIncompleteDays){
             if(incomp.getYear() == year && incomp.getMonth() == month){
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    //get number of completes weekly
+    public int weeklyComplete(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int week = cal.get(Calendar.WEEK_OF_YEAR);
+        int month = date.getMonth();
+        int year = date.getYear();
+        int count = 0;
+
+        for(Date comp : mCompleteDays){
+            Calendar compCal = Calendar.getInstance();
+            compCal.setTime(comp);
+            int compWeek = compCal.get(Calendar.WEEK_OF_YEAR);
+            if(comp.getYear() == year && comp.getMonth() == month && compWeek == week){
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    //get number of incompletes weekly
+    public int weeklyIncomplete(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int week = cal.get(Calendar.WEEK_OF_YEAR);
+        int month = date.getMonth();
+        int year = date.getYear();
+        int count = 0;
+
+        for(Date incomp : mIncompleteDays){
+            Calendar incompCal = Calendar.getInstance();
+            incompCal.setTime(incomp);
+            int incompWeek = incompCal.get(Calendar.WEEK_OF_YEAR);
+            if(incomp.getYear() == year && incomp.getMonth() == month && incompWeek == week){
                 count++;
             }
         }

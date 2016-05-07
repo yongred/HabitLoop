@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 public class GraphActivity extends AppCompatActivity {
 
     @Bind(R.id.sixMonthGraph) GraphView monthGraph;
+    @Bind(R.id.sixWeekGraph) GraphView weekGraph;
     @Bind(R.id.leftArrowButton) Button leftButton;
     @Bind(R.id.rightArrowButton) Button rightButton;
     @Bind(R.id.graphHabitTextView) TextView habitTileTextview;
@@ -43,6 +44,7 @@ public class GraphActivity extends AppCompatActivity {
 
         setupOnclickListeners();
         sixMonthGraph();
+        sixWeekGraph();
 
     }
 
@@ -56,6 +58,47 @@ public class GraphActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //sixMonthGraph();
+    }
+
+    private void sixWeekGraph(){
+
+        Habit hb = TempHabits.mHabits.get(mHabitIndex);
+        Calendar currentCal = Calendar.getInstance();
+        weekGraph.removeAllSeries();
+
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(weekGraph);
+        staticLabelsFormatter.setHorizontalLabels(new String[]{
+                "--",
+                "-5w", "-4w", "-3w",
+                "-2w", "-1w", "w",
+                "--"
+        });
+        weekGraph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+
+        DataPoint point0 = new DataPoint(0,0);
+        DataPoint [] compPoints = new DataPoint[7];
+        DataPoint [] incompPoints = new DataPoint[7];
+        compPoints[0] = point0;
+        incompPoints[0] = point0;
+
+        currentCal.add(Calendar.WEEK_OF_YEAR, -5);
+        for(int i=1; i<= 6; i++){
+            int compCount = 0;
+            int incompCount = 0;
+            compCount = hb.weeklyComplete(currentCal.getTime());
+            compPoints[i] = new DataPoint(i, compCount);
+            incompCount = hb.weeklyIncomplete(currentCal.getTime());
+            incompPoints[i] = new DataPoint(i, incompCount);
+            //increments
+            currentCal.add(Calendar.WEEK_OF_YEAR, 1);
+        }
+
+        BarGraphSeries<DataPoint> compSeries = new BarGraphSeries<DataPoint>(compPoints);
+        BarGraphSeries<DataPoint> incompSeries = new BarGraphSeries<DataPoint>(incompPoints);
+        compSeries.setColor(Color.GREEN);
+        incompSeries.setColor(Color.RED);
+        weekGraph.addSeries(compSeries);
+        weekGraph.addSeries(incompSeries);
     }
 
     private void sixMonthGraph(){
@@ -111,6 +154,7 @@ public class GraphActivity extends AppCompatActivity {
                 }
                 habitTileTextview.setText(TempHabits.mHabits.get(mHabitIndex).getHabitName());
                 sixMonthGraph();
+                sixWeekGraph();
             }
         });
 
@@ -125,6 +169,7 @@ public class GraphActivity extends AppCompatActivity {
                 }
                 habitTileTextview.setText(TempHabits.mHabits.get(mHabitIndex).getHabitName());
                 sixMonthGraph();
+                sixWeekGraph();
             }
         });
     }
