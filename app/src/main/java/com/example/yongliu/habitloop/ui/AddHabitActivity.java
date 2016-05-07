@@ -1,5 +1,6 @@
 package com.example.yongliu.habitloop.ui;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,10 @@ import com.example.yongliu.habitloop.models.Habit;
 import com.example.yongliu.habitloop.models.TempHabits;
 import com.example.yongliu.habitloop.models.WeekDays;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,6 +45,11 @@ public class AddHabitActivity extends AppCompatActivity {
     @Bind(R.id.sundayCheck) CheckBox sunCheck;
 
     private CheckBox [] mCheckBoxes;
+
+    private String mHabitName;
+    private String mStartTime;
+    private String mEndTime;
+    private boolean [] mCheckDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,16 +86,17 @@ public class AddHabitActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save) { //saving data for new habit
             //getting the infos from the Views and set it in new habit for storage
-            String name = habitNameEditText.getText().toString();
-            String startTime = pickTimeStartEdit.getText().toString();
-            String endTime = pickTimeEndEdit.getText().toString();
-            boolean [] boolDays = getCheckedDays();
-            WeekDays days = new WeekDays(boolDays);
-            Habit hb = new Habit(name, 0, startTime, endTime, days);
+            if(checkInfoError()) {
+                WeekDays days = new WeekDays(mCheckDays);
+                Habit hb = new Habit(mHabitName, 0, mStartTime, mEndTime, days);
 
-            TempHabits.mHabits.add(hb);
+                TempHabits.mHabits.add(hb);
 
-            finish();
+                finish();
+            }
+            else{
+                //do nothing
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -127,6 +137,51 @@ public class AddHabitActivity extends AppCompatActivity {
         }
 
         return checks;
+    }
+
+    private boolean checkInfoError() {
+        boolean allCorrect = true;
+        mHabitName = habitNameEditText.getText().toString();
+        mStartTime = pickTimeStartEdit.getText().toString();
+        mEndTime = pickTimeEndEdit.getText().toString();
+        mCheckDays = getCheckedDays();
+
+        if(mHabitName.matches("")){
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.dialog_name_empty_title)
+                    .setMessage(R.string.dialog_name_empty_message)
+                    .setPositiveButton(R.string.dialog_ok_button, null)
+                    .show();
+            allCorrect = false;
+        }
+
+        else if(!mStartTime.matches("") && !mEndTime.matches("")){
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            try {
+                Date startTime = sdf.parse(mStartTime);
+                Date endTime = sdf.parse(mEndTime);
+                if(startTime.compareTo(endTime) == 1){
+                    AlertDialog dialog = new AlertDialog.Builder(this)
+                            .setTitle(R.string.dialog_time_error_title)
+                            .setMessage(R.string.dialog_time_error_message)
+                            .setPositiveButton(R.string.dialog_ok_button, null)
+                            .show();
+                    allCorrect = false;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(mStartTime.matches("")){
+            mStartTime = "Unset Time";
+        }
+
+        if(mEndTime.matches("")){
+            mEndTime = "Unset Time";
+        }
+
+        return allCorrect;
     }
 
 }

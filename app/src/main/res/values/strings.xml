@@ -30,4 +30,8 @@
     <string name="dialog_ok_button">OK</string>
     <string name="dialog_empty_habit_message">There Are No Habit Created Yet!</string>
     <string name="dialog_empty_habit_title">Empty Habit Alert!</string>
+    <string name="dialog_name_empty_title">Empty Name Alert!</string>
+    <string name="dialog_name_empty_message">Sorry! Habit Name Cannot Be Empty!</string>
+    <string name="dialog_time_error_title">Time Setting Alert!</string>
+    <string name="dialog_time_error_message">Sorry! Habit Start Time Must Be Earlier Than End Time!</string>
 </resources>

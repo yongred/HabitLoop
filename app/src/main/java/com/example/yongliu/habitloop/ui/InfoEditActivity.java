@@ -20,7 +20,10 @@ import com.example.yongliu.habitloop.models.Habit;
 import com.example.yongliu.habitloop.models.TempHabits;
 import com.example.yongliu.habitloop.models.WeekDays;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -50,6 +53,11 @@ public class InfoEditActivity extends AppCompatActivity {
     private CheckBox [] mCheckBoxes;
     private Habit mHabit; //current habit to edit
     private int mIndex; //current habit index
+
+    private String mHabitName;
+    private String mStartTime;
+    private String mEndTime;
+    private boolean [] mCheckDays;
 
     static final String TAG = InfoEditActivity.class.toString();
     @Override
@@ -143,18 +151,20 @@ public class InfoEditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Habit targetHb = TempHabits.mHabits.get(mIndex);
                 //getting the infos from the Views and set it in new habit for storage
-                String name = habitNameEditText.getText().toString();
-                String startTime = pickTimeStartEdit.getText().toString();
-                String endTime = pickTimeEndEdit.getText().toString();
-                boolean [] boolDays = getCheckedDays();
-                WeekDays days = new WeekDays(boolDays);
-                //set the habit chosen to new infos
-                targetHb.setHabitName(name);
-                targetHb.setStartTime(startTime);
-                targetHb.setEndTime(endTime);
-                targetHb.setDays(days);
+                if(checkInfoError()) {
 
-                finish();
+                    WeekDays days = new WeekDays(mCheckDays);
+                    //set the habit chosen to new infos
+                    targetHb.setHabitName(mHabitName);
+                    targetHb.setStartTime(mStartTime);
+                    targetHb.setEndTime(mEndTime);
+                    targetHb.setDays(days);
+
+                    finish();
+                }
+                else{
+                    // do nothing
+                }
             }
         });
     }
@@ -184,6 +194,50 @@ public class InfoEditActivity extends AppCompatActivity {
         return checks;
     }
 
+    //check for text edit view empty, compare time
+    private boolean checkInfoError() {
+        boolean allCorrect = true;
+        mHabitName = habitNameEditText.getText().toString();
+        mStartTime = pickTimeStartEdit.getText().toString();
+        mEndTime = pickTimeEndEdit.getText().toString();
+        mCheckDays = getCheckedDays();
 
+        if(mHabitName.matches("")){
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.dialog_name_empty_title)
+                    .setMessage(R.string.dialog_name_empty_message)
+                    .setPositiveButton(R.string.dialog_ok_button, null)
+                    .show();
+            allCorrect = false;
+        }
+
+        else if(!mStartTime.matches("") && !mEndTime.matches("")){
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            try {
+                Date startTime = sdf.parse(mStartTime);
+                Date endTime = sdf.parse(mEndTime);
+                if(startTime.compareTo(endTime) == 1){
+                    AlertDialog dialog = new AlertDialog.Builder(this)
+                            .setTitle(R.string.dialog_time_error_title)
+                            .setMessage(R.string.dialog_time_error_message)
+                            .setPositiveButton(R.string.dialog_ok_button, null)
+                            .show();
+                    allCorrect = false;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(mStartTime.matches("")){
+            mStartTime = "Unset Time";
+        }
+
+        if(mEndTime.matches("")){
+            mEndTime = "Unset Time";
+        }
+
+        return allCorrect;
+    }
 
 }

@@ -55,6 +55,9 @@ public class WeekDays {
         if(countDays == 7){
             mDisplayString = "everyday";
         }
+        else if(countDays == 0){
+            mDisplayString = "Unset Days";
+        }
     }
 
     public String getDisplayString(){
