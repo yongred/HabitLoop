@@ -2,6 +2,8 @@ package com.example.yongliu.habitloop.models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -106,12 +108,36 @@ public class Habit{
         mIncompleteDays.remove(date);
     }
 
-    //not finish
+    //calculate current streak
     public void calculateStreak(){
-        mStreak = mCompleteDays.size();
+        //mStreak = mCompleteDays.size();
+        int streak = 0;
+        ArrayList<Date> allCountedDays = new ArrayList<Date>();
+        allCountedDays.addAll(mCompleteDays);
+        allCountedDays.addAll(mIncompleteDays);
+        //sort complete and incomplete days from early to late
+        Collections.sort(allCountedDays, new Comparator<Date>() {
+            @Override
+            public int compare(Date d1, Date d2) {
+                return d1.compareTo(d2);
+            }
+        });
+
+        //from the most current/late days, count how many consecutive complete days without meeting a incomplete day
+        for(int i= allCountedDays.size()-1; i >= 0; i--){
+            Date day = allCountedDays.get(i);
+            if(mIncompleteDays.contains(day)){
+                break;
+            }
+            else if(mCompleteDays.contains(day)){
+                streak++;
+            }
+        }
+
+        mStreak = streak;
     }
 
-    //get number of completes monthly
+    //get number of completes for that month
     public int monthlyComplete(Date date){
         int month = date.getMonth();
         int year = date.getYear();
@@ -126,7 +152,7 @@ public class Habit{
         return count;
     }
 
-    //get number of incompletes monthly
+    //get number of incompletes for that month
     public int monthlyIncomplete(Date date){
         int month = date.getMonth();
         int year = date.getYear();
@@ -141,7 +167,7 @@ public class Habit{
         return count;
     }
 
-    //get number of completes weekly
+    //get number of completes for that week
     public int weeklyComplete(Date date){
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -162,7 +188,7 @@ public class Habit{
         return count;
     }
 
-    //get number of incompletes weekly
+    //get number of incompletes for that week
     public int weeklyIncomplete(Date date){
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
