@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
               >
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,11 +9,12 @@
                   android:layout_height="wrap_content"
                   android:layout_marginTop="@dimen/list_item_margin"
                   android:background="@drawable/list_selector"
-                  android:orientation="vertical">
+                  android:orientation="vertical"
+                    android:padding="10dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="32sp"
             android:text="Habbit Item"
             android:id="@+id/habitNameViewMain"
             android:layout_centerVertical="true"
@@ -23,28 +23,29 @@
             android:textStyle="bold"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="4"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="15sp"
                 android:ems="5"
                 android:id="@+id/streakLabel"
                 android:singleLine="true"
                 android:ellipsize="marquee"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:text="Streak: "
-                />
+                android:text="Streak: "/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="15sp"
                 android:ems="5"
                 android:id="@+id/habitStreakView"
                 android:layout_alignParentTop="true"
@@ -53,31 +54,73 @@
 
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/habitTimeView"
-            android:ems="5"
-            android:text="6:00PM - 7:30PM"
-            android:singleLine="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:orientation="horizontal">
 
-        <TextView
+            <TextView
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:ems="5"
+                android:id="@+id/timeLabel"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Time: "/>
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:id="@+id/habitTimeView"
+                android:ems="5"
+                android:text="6:00PM - 7:30PM"
+                android:singleLine="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/habitDaysView"
-            android:ems="5"
-            android:text="Mon Tue Fri Sun"
-            android:singleLine="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:ems="5"
+                android:id="@+id/weekDaysLabel"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Days: "/>
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:id="@+id/habitDaysView"
+                android:ems="5"
+                android:text="Mon Tue Fri Sun"
+                android:singleLine="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+        </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+
+</RelativeLayout>
