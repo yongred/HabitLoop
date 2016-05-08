@@ -12,6 +12,7 @@ import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.models.Habit;
 import com.example.yongliu.habitloop.models.TempHabits;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
@@ -65,7 +66,6 @@ public class GraphActivity extends AppCompatActivity {
         Habit hb = TempHabits.mHabits.get(mHabitIndex);
         Calendar currentCal = Calendar.getInstance();
         weekGraph.removeAllSeries();
-
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(weekGraph);
         staticLabelsFormatter.setHorizontalLabels(new String[]{
                 "--",
@@ -99,6 +99,11 @@ public class GraphActivity extends AppCompatActivity {
         incompSeries.setColor(Color.RED);
         weekGraph.addSeries(compSeries);
         weekGraph.addSeries(incompSeries);
+
+        compSeries.setTitle(":)");
+        incompSeries.setTitle(":(");
+        weekGraph.getLegendRenderer().setVisible(true);
+        weekGraph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
     }
 
     private void sixMonthGraph(){
@@ -140,6 +145,11 @@ public class GraphActivity extends AppCompatActivity {
         incompSeries.setColor(Color.RED);
         monthGraph.addSeries(compSeries);
         monthGraph.addSeries(incompSeries);
+
+        compSeries.setTitle(":)");
+        incompSeries.setTitle(":(");
+        monthGraph.getLegendRenderer().setVisible(true);
+        monthGraph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
     }
 
     private void setupOnclickListeners(){
