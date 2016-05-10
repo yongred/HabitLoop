@@ -1,12 +1,13 @@
 package com.example.yongliu.habitloop.models;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * representing the days user wants to do the activity
  * Created by YongLiu on 3/25/16.
  */
-public class WeekDays {
+public class WeekDays implements Serializable{
     static final String [] DAY_STRINGS = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
     private String mDisplayString;
 

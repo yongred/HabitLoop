@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.models.Habit;
+import com.example.yongliu.habitloop.models.Storage;
 import com.example.yongliu.habitloop.ui.InfoEditActivity;
 
 import java.util.ArrayList;
@@ -23,20 +24,22 @@ import java.util.ArrayList;
 public class EditAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Habit> mHabits;
+    private Storage mStorage;
 
     public EditAdapter(Context context, ArrayList<Habit> habits) {
         mContext = context;
         mHabits = habits;
+        mStorage = new Storage(mContext);
     }
 
     @Override
     public int getCount() {
-        return mHabits.size();//mHabits.length;
+        return mStorage.mHabits.size();//mHabits.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return mHabits.get(position);//mHabits[position];
+        return mStorage.mHabits.get(position);//mHabits[position];
     }
 
     @Override
@@ -66,7 +69,7 @@ public class EditAdapter extends BaseAdapter {
         }
 
         //get and set habit infos here
-        Habit habit = mHabits.get(position);
+        Habit habit = mStorage.mHabits.get(position);
         holder.habitNameView.setText(habit.getHabitName());
         holder.delButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +80,8 @@ public class EditAdapter extends BaseAdapter {
                         .setPositiveButton(R.string.dialog_positive_button, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mHabits.remove(position);
+                                Storage.mHabits.remove(position);
+                                mStorage.saveToInternalStorage(Storage.mHabits);
                                 notifyDataSetChanged();
                             }
                         })

@@ -23,7 +23,8 @@
         <TextView
             android:id="@+id/graphHabitTextView"
             style="@style/GraphHabitTitle"
-            android:text="Current Habit"/>
+            android:text="Current Habit"
+            />
 
         <Button
             style="@style/RightButton"

@@ -1,5 +1,6 @@
 package com.example.yongliu.habitloop.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -9,7 +10,7 @@ import java.util.Date;
 /**
  * Created by YongLiu on 1/11/16.
  */
-public class Habit{
+public class Habit implements Serializable{
     private String mHabitName;
     private String mTime; //when they want to do the habit at that day
     private String mStartTime;

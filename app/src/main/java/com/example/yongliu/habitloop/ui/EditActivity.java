@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.adapters.EditAdapter;
-import com.example.yongliu.habitloop.models.TempHabits;
+import com.example.yongliu.habitloop.models.Storage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,6 +17,7 @@ public class EditActivity extends AppCompatActivity {
     @Bind(R.id.editHabitsList) ListView mEditListView;
 
     EditAdapter mEditAdapter;
+    private Storage mStorage;
 
 
     @Override
@@ -29,8 +30,9 @@ public class EditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
+        mStorage = new Storage(this);
 
-        mEditAdapter = new EditAdapter(this, TempHabits.mHabits);
+        mEditAdapter = new EditAdapter(this, Storage.mHabits);
         mEditListView.setAdapter(mEditAdapter);
     }
 
@@ -38,13 +40,20 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Storage.mHabits = mStorage.readFromInternalStorage();
         mEditAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Storage.mHabits = mStorage.readFromInternalStorage();
         mEditAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mStorage.saveToInternalStorage(Storage.mHabits);
+    }
 }

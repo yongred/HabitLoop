@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.adapters.HabitAdapter;
-import com.example.yongliu.habitloop.models.TempHabits;
+import com.example.yongliu.habitloop.models.Storage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.mainHabitsList) ListView mHabitListView;
     HabitAdapter mHabitAdapter;
+    Storage mStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ButterKnife.bind(this);
+        mStorage = new Storage(this);
 
-        mHabitAdapter = new HabitAdapter(this, TempHabits.mHabits);
+        mHabitAdapter = new HabitAdapter(this, Storage.mHabits);
         mHabitListView.setAdapter(mHabitAdapter);
 
         setListViewClickListener();
@@ -50,13 +52,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Storage.mHabits = mStorage.readFromInternalStorage();
         mHabitAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Storage.mHabits = mStorage.readFromInternalStorage();
         mHabitAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mStorage.saveToInternalStorage(Storage.mHabits);
     }
 
     @Override
@@ -75,15 +85,12 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add_habit) {
-            //Habit newHabit = new Habit("habit1", 0, "01/26/16");
-            //mHabits.add(newHabit);
-            //mHabitAdapter.notifyDataSetChanged();
             Intent intent = new Intent(this, AddHabitActivity.class);
             startActivity(intent);
         }
 
         else if (id == R.id.action_check_statistics) {
-            if(TempHabits.mHabits.isEmpty()){
+            if(Storage.mHabits.isEmpty()){
                 AlertDialog dialog = new AlertDialog.Builder(this)
                         .setTitle(R.string.dialog_empty_habit_title)
                         .setMessage(R.string.dialog_empty_habit_message)

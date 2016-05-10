@@ -17,9 +17,7 @@
             android:textSize="32sp"
             android:text="Habbit Item"
             android:id="@+id/habitNameViewMain"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+
             android:textStyle="bold"/>
 
         <LinearLayout
@@ -36,20 +34,15 @@
                 android:id="@+id/streakLabel"
                 android:singleLine="true"
                 android:ellipsize="marquee"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
                 android:text="Streak: "/>
 
             <TextView
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:textSize="15sp"
                 android:ems="5"
                 android:id="@+id/habitStreakView"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
                 android:text="5"/>
 
         </LinearLayout>
@@ -68,8 +61,6 @@
                 android:id="@+id/timeLabel"
                 android:singleLine="true"
                 android:ellipsize="marquee"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
                 android:text="Time: "/>
 
             <TextView
@@ -82,9 +73,7 @@
                 android:ems="5"
                 android:text="6:00PM - 7:30PM"
                 android:singleLine="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"/>
+                />
 
         </LinearLayout>
         <LinearLayout
@@ -102,8 +91,6 @@
                 android:id="@+id/weekDaysLabel"
                 android:singleLine="true"
                 android:ellipsize="marquee"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
                 android:text="Days: "/>
 
             <TextView
@@ -115,10 +102,7 @@
                 android:id="@+id/habitDaysView"
                 android:ems="5"
                 android:text="Mon Tue Fri Sun"
-                android:singleLine="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"/>
+                />
         </LinearLayout>
 
     </LinearLayout>

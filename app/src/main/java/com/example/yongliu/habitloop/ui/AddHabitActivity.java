@@ -15,7 +15,7 @@ import android.widget.TimePicker;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.models.Habit;
-import com.example.yongliu.habitloop.models.TempHabits;
+import com.example.yongliu.habitloop.models.Storage;
 import com.example.yongliu.habitloop.models.WeekDays;
 
 import java.text.ParseException;
@@ -46,10 +46,14 @@ public class AddHabitActivity extends AppCompatActivity {
 
     private CheckBox [] mCheckBoxes;
 
+    //input values from views
     private String mHabitName;
     private String mStartTime;
     private String mEndTime;
     private boolean [] mCheckDays;
+
+    //Storage
+    private Storage mStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +69,16 @@ public class AddHabitActivity extends AppCompatActivity {
         setOnclickTimeDialog(pickTimeStartEdit);
         setOnclickTimeDialog(pickTimeEndEdit);
 
+        mStorage = new Storage(this);
+
         mCheckBoxes = new CheckBox[] {monCheck, tueCheck, wedCheck, thuCheck, friCheck,
                 satCheck, sunCheck};
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mStorage.saveToInternalStorage(Storage.mHabits);
     }
 
     @Override
@@ -90,8 +102,8 @@ public class AddHabitActivity extends AppCompatActivity {
                 WeekDays days = new WeekDays(mCheckDays);
                 Habit hb = new Habit(mHabitName, 0, mStartTime, mEndTime, days);
 
-                TempHabits.mHabits.add(hb);
-
+                Storage.mHabits.add(hb);
+                mStorage.saveToInternalStorage(Storage.mHabits);
                 finish();
             }
             else{
@@ -139,6 +151,7 @@ public class AddHabitActivity extends AppCompatActivity {
         return checks;
     }
 
+    //
     private boolean checkInfoError() {
         boolean allCorrect = true;
         mHabitName = habitNameEditText.getText().toString();

@@ -11,7 +11,7 @@ import android.widget.Button;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.models.Habit;
-import com.example.yongliu.habitloop.models.TempHabits;
+import com.example.yongliu.habitloop.models.Storage;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,12 +26,14 @@ public class GridCellAdapter extends BaseAdapter {
     private ArrayList<Date> mDays;
     private Date mCurrentDate;
     private int mHabitPosition;
+    private Storage mStorage;
 
     public GridCellAdapter(Context context, ArrayList<Date> days, Date currentDate, int habitPosition) {
         mContext = context;
         mDays = days;
         mCurrentDate = currentDate;
         mHabitPosition = habitPosition;
+        mStorage = new Storage(mContext);
     }
 
     @Override
@@ -92,7 +94,7 @@ public class GridCellAdapter extends BaseAdapter {
         holder.gridcellButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Habit hb = TempHabits.mHabits.get(mHabitPosition);
+                Habit hb = Storage.mHabits.get(mHabitPosition);
                 Date comp = checkContain(hb.getCompleteDays(), currentCellDate);
                 Date incomp = checkContain(hb.getIncompleteDays(), currentCellDate);
                 if(comp != null){ //currently filled with complete color, change to incomplete
@@ -123,8 +125,8 @@ public class GridCellAdapter extends BaseAdapter {
     private int checkComplete(Date currentCellDate){
         //0= incomplete, 1= complete, 2= neither/empty
         int status = 2;
-        ArrayList<Date> completes = TempHabits.mHabits.get(mHabitPosition).getCompleteDays();
-        ArrayList<Date> incompletes = TempHabits.mHabits.get(mHabitPosition).getIncompleteDays();
+        ArrayList<Date> completes = Storage.mHabits.get(mHabitPosition).getCompleteDays();
+        ArrayList<Date> incompletes = Storage.mHabits.get(mHabitPosition).getIncompleteDays();
 
         Date comp = checkContain(completes, currentCellDate);
         Date incomp = checkContain(incompletes, currentCellDate);

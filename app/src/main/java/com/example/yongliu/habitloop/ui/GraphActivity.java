@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.models.Habit;
-import com.example.yongliu.habitloop.models.TempHabits;
+import com.example.yongliu.habitloop.models.Storage;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
@@ -30,6 +30,7 @@ public class GraphActivity extends AppCompatActivity {
     @Bind(R.id.rightArrowButton) Button rightButton;
     @Bind(R.id.graphHabitTextView) TextView habitTileTextview;
     private int mHabitIndex;
+    private Storage mStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,9 @@ public class GraphActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
+        mStorage = new Storage(this);
         mHabitIndex =0;
-        habitTileTextview.setText(TempHabits.mHabits.get(mHabitIndex).getHabitName());
+        habitTileTextview.setText(Storage.mHabits.get(mHabitIndex).getHabitName());
 
         setupOnclickListeners();
         sixMonthGraph();
@@ -63,9 +65,10 @@ public class GraphActivity extends AppCompatActivity {
 
     private void sixWeekGraph(){
 
-        Habit hb = TempHabits.mHabits.get(mHabitIndex);
+        Habit hb = Storage.mHabits.get(mHabitIndex);
         Calendar currentCal = Calendar.getInstance();
         weekGraph.removeAllSeries();
+        //labels format
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(weekGraph);
         staticLabelsFormatter.setHorizontalLabels(new String[]{
                 "--",
@@ -75,12 +78,14 @@ public class GraphActivity extends AppCompatActivity {
         });
         weekGraph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
 
+        //data points, first coordinate (0,0) is omitted for the visual of the graph
         DataPoint point0 = new DataPoint(0,0);
         DataPoint [] compPoints = new DataPoint[7];
         DataPoint [] incompPoints = new DataPoint[7];
         compPoints[0] = point0;
         incompPoints[0] = point0;
 
+        //loop through 6 weeks set up data points
         currentCal.add(Calendar.WEEK_OF_YEAR, -5);
         for(int i=1; i<= 6; i++){
             int compCount = 0;
@@ -93,6 +98,7 @@ public class GraphActivity extends AppCompatActivity {
             currentCal.add(Calendar.WEEK_OF_YEAR, 1);
         }
 
+        //define series with points datas setup above
         BarGraphSeries<DataPoint> compSeries = new BarGraphSeries<DataPoint>(compPoints);
         BarGraphSeries<DataPoint> incompSeries = new BarGraphSeries<DataPoint>(incompPoints);
         compSeries.setColor(Color.GREEN);
@@ -100,15 +106,17 @@ public class GraphActivity extends AppCompatActivity {
         weekGraph.addSeries(compSeries);
         weekGraph.addSeries(incompSeries);
 
-        compSeries.setTitle(":)");
-        incompSeries.setTitle(":(");
+        //floating legend icon
+        compSeries.setTitle("comp");
+        incompSeries.setTitle("incomp");
+        //weekGraph.getLegendRenderer().setTextSize(40);
         weekGraph.getLegendRenderer().setVisible(true);
         weekGraph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
     }
 
     private void sixMonthGraph(){
 
-        Habit hb = TempHabits.mHabits.get(mHabitIndex);
+        Habit hb = Storage.mHabits.get(mHabitIndex);
         Calendar currentCal = Calendar.getInstance();
         monthGraph.removeAllSeries();
 
@@ -146,8 +154,9 @@ public class GraphActivity extends AppCompatActivity {
         monthGraph.addSeries(compSeries);
         monthGraph.addSeries(incompSeries);
 
-        compSeries.setTitle(":)");
-        incompSeries.setTitle(":(");
+        //legend floating
+        compSeries.setTitle("comp");
+        incompSeries.setTitle("incomp");
         monthGraph.getLegendRenderer().setVisible(true);
         monthGraph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
     }
@@ -160,9 +169,9 @@ public class GraphActivity extends AppCompatActivity {
                     mHabitIndex--;
                 }
                 else{
-                    mHabitIndex = TempHabits.mHabits.size() -1;
+                    mHabitIndex = Storage.mHabits.size() -1;
                 }
-                habitTileTextview.setText(TempHabits.mHabits.get(mHabitIndex).getHabitName());
+                habitTileTextview.setText(Storage.mHabits.get(mHabitIndex).getHabitName());
                 sixMonthGraph();
                 sixWeekGraph();
             }
@@ -171,13 +180,13 @@ public class GraphActivity extends AppCompatActivity {
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mHabitIndex < TempHabits.mHabits.size() -1) {
+                if(mHabitIndex < Storage.mHabits.size() -1) {
                     mHabitIndex++;
                 }
                 else{
                     mHabitIndex = 0;
                 }
-                habitTileTextview.setText(TempHabits.mHabits.get(mHabitIndex).getHabitName());
+                habitTileTextview.setText(Storage.mHabits.get(mHabitIndex).getHabitName());
                 sixMonthGraph();
                 sixWeekGraph();
             }

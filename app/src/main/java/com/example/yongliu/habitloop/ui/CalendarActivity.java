@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.yongliu.habitloop.R;
 import com.example.yongliu.habitloop.adapters.GridCellAdapter;
 import com.example.yongliu.habitloop.models.Habit;
-import com.example.yongliu.habitloop.models.TempHabits;
+import com.example.yongliu.habitloop.models.Storage;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +43,8 @@ public class CalendarActivity extends AppCompatActivity {
     private Habit mHabit; //current habit to display calendar
     private int mIndex; //current habit index
 
+    private Storage mStorage;
+
     static final String TAG = CalendarActivity.class.toString();
 
     @Override
@@ -57,17 +59,21 @@ public class CalendarActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         assignClickHandlers();
 
+        mStorage = new Storage(this);
+
         //which habit from MainActivity
         Intent intent = getIntent();
         int position = intent.getIntExtra(getString(R.string.EXTRA_HABIT_CLICKED_INDEX), -1);
         if(position != -1) {
-            mHabit = TempHabits.mHabits.get(position);
+            mHabit = Storage.mHabits.get(position);
             mIndex = position;
 
         }
         else{
             Log.e(TAG, getString(R.string.passing_extra_error));
         }
+        //set actionbar title to name of habit
+        this.setTitle(mHabit.getHabitName());
         updateCalendar();
     }
 
@@ -81,6 +87,12 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateCalendar();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mStorage.saveToInternalStorage(Storage.mHabits);
     }
 
     private void updateCalendar() {
