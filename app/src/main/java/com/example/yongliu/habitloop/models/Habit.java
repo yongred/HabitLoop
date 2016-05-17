@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Habit implements Serializable{
     private String mHabitName;
+    private int mHabitID;
     private String mTime; //when they want to do the habit at that day
     private String mStartTime;
     private String mEndTime;
@@ -28,6 +29,19 @@ public class Habit implements Serializable{
 
     public Habit(String habitName, int streak, String startTime, String endTime, WeekDays days){
         mHabitName = habitName;
+        mStartTime = startTime;
+        mEndTime = endTime;
+        mStreak = streak;
+        mDays = days;
+        mCompleteDays = new ArrayList<Date>();
+        mIncompleteDays = new ArrayList<Date>();
+    }
+
+    public Habit(String habitName, int habitID, int streak, String startTime, String endTime,
+                 WeekDays
+            days){
+        mHabitName = habitName;
+        mHabitID = habitID;
         mStartTime = startTime;
         mEndTime = endTime;
         mStreak = streak;

@@ -39,6 +39,21 @@ public class Storage {
         }
     }
 
+    public void saveToInternalStorage(ArrayList<Habit> listToSave, String username) {
+        try {
+            FileOutputStream fos = mContext.openFileOutput(STORAGE_FILENAME, Context.MODE_PRIVATE);
+            ObjectOutputStream of = new ObjectOutputStream(fos);
+            of.writeObject(listToSave);
+            of.writeObject(username);
+            of.flush();
+            of.close();
+            fos.close();
+        }
+        catch (Exception e) {
+            Log.e("InternalStorage", e.getMessage());
+        }
+    }
+
     public ArrayList<Habit> readFromInternalStorage() {
         ArrayList<Habit> listReturn = new ArrayList<Habit>();
         FileInputStream fis;
@@ -56,5 +71,24 @@ public class Storage {
         }
         return listReturn;
     }
+
+    public String readUserFromInternalStorage() {
+        String stringReturn = "";
+        FileInputStream fis;
+        try {
+            fis = mContext.openFileInput(STORAGE_FILENAME);
+            ObjectInputStream oi = new ObjectInputStream(fis);
+            stringReturn = (String) oi.readObject();
+            oi.close();
+        } catch (FileNotFoundException e) {
+            Log.e("InternalStorage", e.getMessage());
+        } catch (IOException e) {
+            Log.e("InternalStorage", e.getMessage());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return stringReturn;
+    }
+
 
 }

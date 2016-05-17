@@ -63,7 +63,7 @@ public class AddHabitActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear_black_24dp);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear_black_24dp);
 
         ButterKnife.bind(this);
         setOnclickTimeDialog(pickTimeStartEdit);

@@ -101,14 +101,17 @@ public class GridCellAdapter extends BaseAdapter {
                     hb.removeCompleteDays(comp);
                     hb.addIncompleteDays(currentCellDate);
                     v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorGridcellIncomplete));
+                    mStorage.saveToInternalStorage(Storage.mHabits);
                 }
                 else if(incomp != null){//currently filled with incomplete color, change to blank/unfilled
                     hb.removeIncompleteDays(incomp);
                     v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorGridcellBackground));
+                    mStorage.saveToInternalStorage(Storage.mHabits);
                 }
                 else if(incomp == null && comp ==null){ //currently unfilled, change to complete
                     hb.addCompleteDays(currentCellDate);
                     v.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorGridcellComplete));
+                    mStorage.saveToInternalStorage(Storage.mHabits);
                 }
 
             }
