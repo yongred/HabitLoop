@@ -56,36 +56,54 @@ public class Storage {
 
     public ArrayList<Habit> readFromInternalStorage() {
         ArrayList<Habit> listReturn = new ArrayList<Habit>();
-        FileInputStream fis;
+        FileInputStream fis = null;
         try {
             fis = mContext.openFileInput(STORAGE_FILENAME);
-            ObjectInputStream oi = new ObjectInputStream(fis);
-            listReturn = (ArrayList<Habit>) oi.readObject();
-            oi.close();
+
         } catch (FileNotFoundException e) {
             Log.e("InternalStorage", e.getMessage());
-        } catch (IOException e) {
-            Log.e("InternalStorage", e.getMessage());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        }
+
+        if(fis != null){
+            ObjectInputStream oi = null;
+            try {
+                oi = new ObjectInputStream(fis);
+                if(oi != null)
+                    listReturn = (ArrayList<Habit>) oi.readObject();
+                oi.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
         return listReturn;
     }
 
     public String readUserFromInternalStorage() {
         String stringReturn = "";
-        FileInputStream fis;
+        FileInputStream fis = null;
         try {
             fis = mContext.openFileInput(STORAGE_FILENAME);
-            ObjectInputStream oi = new ObjectInputStream(fis);
-            stringReturn = (String) oi.readObject();
-            oi.close();
+
         } catch (FileNotFoundException e) {
             Log.e("InternalStorage", e.getMessage());
-        } catch (IOException e) {
-            Log.e("InternalStorage", e.getMessage());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        }
+
+        if(fis != null){
+            ObjectInputStream oi = null;
+            try {
+                oi = new ObjectInputStream(fis);
+                if(oi != null)
+                    stringReturn = (String) oi.readObject();
+                oi.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
         return stringReturn;
     }
