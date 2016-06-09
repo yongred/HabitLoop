@@ -1,4 +1,4 @@
-package com.example.yongliu.habitloop.models;
+package com.yongliu.habitloop.models;
 
 import java.io.Serializable;
 import java.util.Arrays;

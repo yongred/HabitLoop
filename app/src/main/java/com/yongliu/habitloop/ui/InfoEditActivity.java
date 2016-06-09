@@ -1,22 +1,24 @@
-package com.example.yongliu.habitloop.ui;
+package com.yongliu.habitloop.ui;
 
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.example.yongliu.habitloop.R;
-import com.example.yongliu.habitloop.models.Habit;
-import com.example.yongliu.habitloop.models.Storage;
-import com.example.yongliu.habitloop.models.WeekDays;
+import com.yongliu.habitloop.R;
+import com.yongliu.habitloop.models.Habit;
+import com.yongliu.habitloop.models.Storage;
+import com.yongliu.habitloop.models.Trace;
+import com.yongliu.habitloop.models.WeekDays;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,7 +28,8 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class AddHabitActivity extends AppCompatActivity {
+public class InfoEditActivity extends AppCompatActivity {
+
     //habit name needs to save
     @Bind(R.id.habitNameInput) EditText habitNameEditText;
 
@@ -43,22 +46,27 @@ public class AddHabitActivity extends AppCompatActivity {
     @Bind(R.id.fridayCheck) CheckBox friCheck;
     @Bind(R.id.saturdayCheck) CheckBox satCheck;
     @Bind(R.id.sundayCheck) CheckBox sunCheck;
+    //save delete buttons
+    @Bind(R.id.infoEditDeleteButton) Button deleteButton;
+    @Bind(R.id.infoEditSaveButton) Button saveButton;
 
     private CheckBox [] mCheckBoxes;
+    private Habit mHabit; //current habit to edit
+    private int mIndex; //current habit index
 
-    //input values from views
+    private Storage mStorage;
+
+    //editText view input values for error checking, editing and saving
     private String mHabitName;
     private String mStartTime;
     private String mEndTime;
     private boolean [] mCheckDays;
 
-    //Storage
-    private Storage mStorage;
-
+    static final String TAG = InfoEditActivity.class.toString();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_habit);
+        setContentView(R.layout.activity_info_edit);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -70,48 +78,32 @@ public class AddHabitActivity extends AppCompatActivity {
         setOnclickTimeDialog(pickTimeEndEdit);
 
         mStorage = new Storage(this);
-
+        //check boxes
         mCheckBoxes = new CheckBox[] {monCheck, tueCheck, wedCheck, thuCheck, friCheck,
                 satCheck, sunCheck};
+        //get the index extra from editActivity to get the habit needed to edit
+        Intent intent = getIntent();
+        int position = intent.getIntExtra(getString(R.string.EXTRA_HABIT_CLICKED_INDEX), -1);
+        if(position != -1) {
+            mHabit = Storage.mHabits.get(position);
+            mIndex = position;
+        }
+        else{
+            Trace.e(TAG, getString(R.string.passing_extra_error));
+        }
+        //set actionbar title to name of habit
+        this.setTitle(mHabit.getHabitName());
+        //set buttons onclick listener
+        setOnclickDeleteButton();
+        setOnclickSaveButton();
+        //set up input infos
+        putStartedInputInfos();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mStorage.saveToInternalStorage(Storage.mHabits);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_habit_info, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_save) { //saving data for new habit
-            //getting the infos from the Views and set it in new habit for storage
-            if(checkInfoError()) {
-                WeekDays days = new WeekDays(mCheckDays);
-                Habit hb = new Habit(mHabitName, 0, mStartTime, mEndTime, days);
-
-                Storage.mHabits.add(hb);
-                mStorage.saveToInternalStorage(Storage.mHabits);
-                finish();
-            }
-            else{
-                //do nothing
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void setOnclickTimeDialog(final EditText timeEdit){
@@ -125,7 +117,8 @@ public class AddHabitActivity extends AppCompatActivity {
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(AddHabitActivity.this, new TimePickerDialog.OnTimeSetListener
+                mTimePicker = new TimePickerDialog(InfoEditActivity.this, new TimePickerDialog
+                        .OnTimeSetListener
                         () {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
@@ -137,6 +130,70 @@ public class AddHabitActivity extends AppCompatActivity {
                 mTimePicker.show();
             }
         });
+    }
+
+    public void setOnclickDeleteButton(){
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog dialog = new AlertDialog.Builder(InfoEditActivity.this)
+                        .setTitle(R.string.dialog_delete_title)
+                        .setMessage(R.string.dialog_delete_message)
+                        .setPositiveButton(R.string.dialog_positive_button, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Storage.mHabits.remove(mHabit);
+                                mStorage.saveToInternalStorage(Storage.mHabits);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.dialog_negative_button, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //do nothing
+                            }
+                        }).show();
+            }
+        });
+
+    }
+
+    public void setOnclickSaveButton(){
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Habit targetHb = Storage.mHabits.get(mIndex);
+                //getting the infos from the Views and set it in new habit for storage
+                if(checkInfoError()) {//true no error
+
+                    WeekDays days = new WeekDays(mCheckDays);
+                    //set the habit chosen to new infos
+                    targetHb.setHabitName(mHabitName);
+                    targetHb.setStartTime(mStartTime);
+                    targetHb.setEndTime(mEndTime);
+                    targetHb.setDays(days);
+
+                    mStorage.saveToInternalStorage(Storage.mHabits);
+                    finish();
+                }
+                else{
+                    // do nothing
+                }
+            }
+        });
+    }
+
+    //informations on the habit put it in the inputs
+    private void putStartedInputInfos(){
+        boolean [] daysChecked = mHabit.getDays().getDayBools();
+        habitNameEditText.setText(mHabit.getHabitName());
+        pickTimeStartEdit.setText(mHabit.getStartTime());
+        pickTimeEndEdit.setText(mHabit.getEndTime());
+        for(int i=0; i< mCheckBoxes.length; i++){
+            if(daysChecked[i]){
+                mCheckBoxes[i].setChecked(true);
+            }
+        }
     }
 
     //return which box for weekdays is checked
@@ -151,8 +208,8 @@ public class AddHabitActivity extends AppCompatActivity {
         return checks;
     }
 
-    //
-    private boolean checkInfoError() {
+    //check for text edit view empty, compare time
+    private boolean checkInfoError() { //true no error, false error
         boolean allCorrect = true;
         mHabitName = habitNameEditText.getText().toString();
         mStartTime = pickTimeStartEdit.getText().toString();
@@ -168,7 +225,8 @@ public class AddHabitActivity extends AppCompatActivity {
             allCorrect = false;
         }
 
-        else if(!mStartTime.matches("") && !mEndTime.matches("")){
+        else if(!mStartTime.matches("") && !mEndTime.matches("")
+                && !mStartTime.matches("Unset Time") && !mEndTime.matches("Unset Time")){
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             try {
                 Date startTime = sdf.parse(mStartTime);

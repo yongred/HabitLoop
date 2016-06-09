@@ -1,4 +1,4 @@
-package com.example.yongliu.habitloop.adapters;
+package com.yongliu.habitloop.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
-import com.example.yongliu.habitloop.R;
-import com.example.yongliu.habitloop.models.Habit;
-import com.example.yongliu.habitloop.models.Storage;
+import com.yongliu.habitloop.R;
+import com.yongliu.habitloop.models.Habit;
+import com.yongliu.habitloop.models.Storage;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,7 +81,7 @@ public class GridCellAdapter extends BaseAdapter {
             holder.gridcellButton.setTextColor(ContextCompat.getColor(mContext, R.color.colorGridcellToday));
         }
 
-        //check complete fill background
+        //check complete, fill background
         int status = checkComplete(currentCellDate);
         if(status == 0){
             holder.gridcellButton.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorGridcellIncomplete));

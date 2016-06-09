@@ -1,4 +1,4 @@
-package com.example.yongliu.habitloop;
+package com.yongliu.habitloop;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

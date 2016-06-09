@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.yongliu.habitloop" >
+    package="com.yongliu.habitloop" >
 
     <application
         android:allowBackup="true"
@@ -26,7 +26,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.yongliu.habitloop.ui.MainActivity" />
+                android:value="com.yongliu.habitloop.ui.MainActivity" />
         </activity>
         <activity
             android:name=".ui.GraphActivity"
@@ -36,7 +36,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.yongliu.habitloop.ui.MainActivity" />
+                android:value="com.yongliu.habitloop.ui.MainActivity" />
         </activity>
         <activity
             android:name=".ui.EditActivity"
@@ -45,7 +45,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.yongliu.habitloop.ui.MainActivity" />
+                android:value="com.yongliu.habitloop.ui.MainActivity" />
         </activity>
         <activity
             android:name=".ui.InfoEditActivity"
@@ -55,7 +55,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.yongliu.habitloop.ui.EditActivity" />
+                android:value="com.yongliu.habitloop.ui.EditActivity" />
         </activity>
         <activity
             android:name=".ui.CalendarActivity"
@@ -65,7 +65,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.yongliu.habitloop.ui.MainActivity" />
+                android:value="com.yongliu.habitloop.ui.MainActivity" />
         </activity>
     </application>
 

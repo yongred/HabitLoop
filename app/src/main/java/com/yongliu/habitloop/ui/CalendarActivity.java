@@ -1,19 +1,19 @@
-package com.example.yongliu.habitloop.ui;
+package com.yongliu.habitloop.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.example.yongliu.habitloop.R;
-import com.example.yongliu.habitloop.adapters.GridCellAdapter;
-import com.example.yongliu.habitloop.models.Habit;
-import com.example.yongliu.habitloop.models.Storage;
+import com.yongliu.habitloop.R;
+import com.yongliu.habitloop.adapters.GridCellAdapter;
+import com.yongliu.habitloop.models.Habit;
+import com.yongliu.habitloop.models.Storage;
+import com.yongliu.habitloop.models.Trace;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -70,7 +70,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         }
         else{
-            Log.e(TAG, getString(R.string.passing_extra_error));
+            Trace.e(TAG, getString(R.string.passing_extra_error));
         }
         //set actionbar title to name of habit
         this.setTitle(mHabit.getHabitName());

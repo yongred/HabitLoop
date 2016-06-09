@@ -1,7 +1,6 @@
-package com.example.yongliu.habitloop.models;
+package com.yongliu.habitloop.models;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,7 +34,7 @@ public class Storage {
             fos.close();
         }
         catch (Exception e) {
-            Log.e("InternalStorage", e.getMessage());
+            Trace.e("InternalStorage", e.getMessage());
         }
     }
 
@@ -50,7 +49,7 @@ public class Storage {
             fos.close();
         }
         catch (Exception e) {
-            Log.e("InternalStorage", e.getMessage());
+            Trace.e("InternalStorage", e.getMessage());
         }
     }
 
@@ -61,7 +60,7 @@ public class Storage {
             fis = mContext.openFileInput(STORAGE_FILENAME);
 
         } catch (FileNotFoundException e) {
-            Log.e("InternalStorage", e.getMessage());
+            Trace.e("InternalStorage", e.getMessage());
         }
 
         if(fis != null){
@@ -88,7 +87,7 @@ public class Storage {
             fis = mContext.openFileInput(STORAGE_FILENAME);
 
         } catch (FileNotFoundException e) {
-            Log.e("InternalStorage", e.getMessage());
+            Trace.e("InternalStorage", e.getMessage());
         }
 
         if(fis != null){

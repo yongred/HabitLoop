@@ -1,4 +1,4 @@
-package com.example.yongliu.habitloop.adapters;
+package com.yongliu.habitloop.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,10 +11,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.yongliu.habitloop.R;
-import com.example.yongliu.habitloop.models.Habit;
-import com.example.yongliu.habitloop.models.Storage;
-import com.example.yongliu.habitloop.ui.InfoEditActivity;
+import com.yongliu.habitloop.R;
+import com.yongliu.habitloop.models.Habit;
+import com.yongliu.habitloop.models.Storage;
+import com.yongliu.habitloop.ui.InfoEditActivity;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.yongliu.habitloop.adapters;
+package com.yongliu.habitloop.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.yongliu.habitloop.R;
-import com.example.yongliu.habitloop.models.Habit;
-import com.example.yongliu.habitloop.models.Storage;
+import com.yongliu.habitloop.R;
+import com.yongliu.habitloop.models.Habit;
+import com.yongliu.habitloop.models.Storage;
 
 import java.util.ArrayList;
 

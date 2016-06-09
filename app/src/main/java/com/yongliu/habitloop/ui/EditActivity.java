@@ -1,13 +1,13 @@
-package com.example.yongliu.habitloop.ui;
+package com.yongliu.habitloop.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
-import com.example.yongliu.habitloop.R;
-import com.example.yongliu.habitloop.adapters.EditAdapter;
-import com.example.yongliu.habitloop.models.Storage;
+import com.yongliu.habitloop.R;
+import com.yongliu.habitloop.adapters.EditAdapter;
+import com.yongliu.habitloop.models.Storage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.example.yongliu.habitloop.models;
+package com.yongliu.habitloop.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,9 +37,8 @@ public class Habit implements Serializable{
         mIncompleteDays = new ArrayList<Date>();
     }
 
-    public Habit(String habitName, int habitID, int streak, String startTime, String endTime,
-                 WeekDays
-            days){
+    //Ricky wanted for sql backend
+    public Habit(String habitName, int habitID, int streak, String startTime, String endTime, WeekDays days){
         mHabitName = habitName;
         mHabitID = habitID;
         mStartTime = startTime;

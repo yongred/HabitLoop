@@ -1,4 +1,4 @@
-package com.example.yongliu.habitloop.ui;
+package com.yongliu.habitloop.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.yongliu.habitloop.R;
-import com.example.yongliu.habitloop.models.Habit;
-import com.example.yongliu.habitloop.models.Storage;
+import com.yongliu.habitloop.R;
+import com.yongliu.habitloop.models.Habit;
+import com.yongliu.habitloop.models.Storage;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;

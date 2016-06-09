@@ -1,4 +1,4 @@
-package com.example.yongliu.habitloop.ui;
+package com.yongliu.habitloop.ui;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -11,9 +11,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.yongliu.habitloop.R;
-import com.example.yongliu.habitloop.adapters.HabitAdapter;
-import com.example.yongliu.habitloop.models.Storage;
+import com.yongliu.habitloop.R;
+import com.yongliu.habitloop.adapters.HabitAdapter;
+import com.yongliu.habitloop.models.Storage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_edit"
-    tools:context="com.example.yongliu.habitloop.ui.EditActivity"
+    tools:context="com.yongliu.habitloop.ui.EditActivity"
     android:background="@color/colorActivityBackground">
 
 
